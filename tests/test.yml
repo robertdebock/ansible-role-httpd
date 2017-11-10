@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  roles:
+    - ansible-role-template
+
+  tasks:
+    - name: some test to prove the the role works
+      shell: echo "yes"

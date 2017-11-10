@@ -1,0 +1,12 @@
+---
+# tasks file for ansible-role-httpd
+- name: install software
+  package:
+    name: httpd
+    state: latest
+
+- name: start and enable software
+  service:
+    name: httpd
+    state: started
+    enabled: yes
