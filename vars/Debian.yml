@@ -1,5 +1,5 @@
 ---
 packages:
-- apache2
+  - apache2
 services:
-- apache2
+  - apache2
