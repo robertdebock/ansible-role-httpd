@@ -3,7 +3,7 @@
   remote_user: root
 
   roles:
-    - ansible-role-httpd
+    - httpd
 
   tasks:
     - name: test if port is open
