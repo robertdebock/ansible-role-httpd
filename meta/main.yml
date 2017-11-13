@@ -1,6 +1,6 @@
 galaxy_info:
   author: Robert de Bock
-  description: Provides Apache httpd
+  description: Provides httpd for your system.
   license: Apache License, Version 2.0
   min_ansible_version: 2.0
   min_ansible_container_version: 0.2.0
@@ -26,11 +26,17 @@ galaxy_info:
     - artful
 
   galaxy_tags:
-    - alpine
-    - debian
-    - fedora
-    - rhel
-    - ubuntu
+    - webserver
+    - apache
+    - httpd
+    - installer
+    - pacakge
+    - Alpine
+    - CentOS
+    - Debian
+    - Fedora
+    - RHEL
+    - Ubuntu
 
 dependencies:
   - robertdebock.bootstrap

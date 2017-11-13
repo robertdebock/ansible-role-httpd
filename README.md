@@ -1,12 +1,12 @@
 httpd
 =========
 
-Provides httpd
+Provides httpd for your system.
 
 Requirements
 ------------
 
-Access to a repository providing an Apache httpd package.
+Access to a repository containing packages, likely on the internet.
 
 Role Variables
 --------------
@@ -23,8 +23,15 @@ Example Playbook
 
 ```
 - hosts: servers
+
   roles:
     - robertdebock.httpd
+
+  tasks:
+    - name: place content
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
 ```
 
 License
