@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
 
   roles:
@@ -8,7 +8,7 @@
   tasks:
     - name: test if port is open
       wait_for:
-        host: localhost
+        host: "{{ inventory_hostname }}"
         port: 80
         delay: 5
         timeout: 30
