@@ -1,0 +1,5 @@
+---
+packages:
+  - apache2
+services:
+  - apache2
