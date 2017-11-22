@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Robert de Bock
   description: Provides httpd for your system.
@@ -25,7 +26,7 @@ galaxy_info:
       versions:
         - artful
         - zesty
-        
+
   galaxy_tags:
     - webserver
     - apache
