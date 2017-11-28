@@ -20,7 +20,7 @@ Dependencies
 
 - robertdebock.ansible-role-bootstrap
 
-Download the dependencies by issueing this command:
+Download the dependencies by issuing this command:
 ```
 ansible-galaxy install --role-file requirements.yml
 ```
@@ -32,7 +32,7 @@ Example Playbook
 - hosts: servers
 
   roles:
-    - ansible-role-httpd
+    - robertdebock.ansible-role-httpd
 
   tasks:
     - name: place content
@@ -40,6 +40,8 @@ Example Playbook
         src: files/index.html
         dest: /var/www/html/index.html
 ```
+
+Install this role using `galaxy install robertdebock.ansible-role-httpd`.
 
 License
 -------
