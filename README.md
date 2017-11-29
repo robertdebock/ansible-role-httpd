@@ -1,7 +1,7 @@
 httpd
 =========
 
-[![Build Status](https://travis-ci.org/robertdebock.ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
+[![Build Status](https://travis-ci.org/robertdebock/ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
 
 Provides Apache httpd for your system.
 
