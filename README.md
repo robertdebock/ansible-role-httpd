@@ -1,7 +1,7 @@
-ansible-role-httpd
+httpd
 =========
 
-[![Build Status](https://travis-ci.org/robertdebock/ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
+[![Build Status](https://travis-ci.org/robertdebock.ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
 
 Provides Apache httpd for your system.
 
@@ -18,7 +18,7 @@ None known.
 Dependencies
 ------------
 
-- robertdebock.ansible-role-bootstrap
+- robertdebock.bootstrap
 
 Download the dependencies by issuing this command:
 ```
@@ -32,7 +32,7 @@ Example Playbook
 - hosts: servers
 
   roles:
-    - robertdebock.ansible-role-httpd
+    - robertdebock.httpd
 
   tasks:
     - name: place content
@@ -41,7 +41,7 @@ Example Playbook
         dest: /var/www/html/index.html
 ```
 
-Install this role using `galaxy install robertdebock.ansible-role-httpd`.
+Install this role using `galaxy install robertdebock.httpd`.
 
 License
 -------
