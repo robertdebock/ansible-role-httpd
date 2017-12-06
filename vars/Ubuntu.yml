@@ -1,5 +1,5 @@
 ---
-packages:
+httpd_packages:
   - apache2
-services:
+shttpd_ervices:
   - apache2

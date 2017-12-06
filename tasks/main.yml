@@ -12,7 +12,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ packages }}"
+    - "{{ httpd_packages }}"
 
 - name: start and enable software
   service:
@@ -20,6 +20,6 @@
     state: started
     enabled: yes
   with_items:
-    - "{{ services }}"
+    - "{{ httpd_services }}"
   when:
     - ansible_virtualization_type != "docker"
