@@ -1,5 +1,5 @@
 ---
-packages:
+httpd_packages:
   - httpd
-services:
+https_services:
   - httpd
