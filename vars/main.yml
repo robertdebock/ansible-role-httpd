@@ -1,2 +1,21 @@
 ---
-# vars file for template
+# vars file for httpd
+httpd_packages:
+  Alpine:
+    - apache2
+  Debian:
+    - apache2
+  default:
+    - httpd
+  Ubuntu:
+    - apache2
+
+httpd_services:
+  Alpine:
+    - apache2
+  Debian:
+    - apache2
+  default:
+    - httpd
+  Ubuntu:
+    - apache2

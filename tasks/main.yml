@@ -1,18 +1,13 @@
 ---
 # tasks file for httpd
-- name: include distribution specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "httpd.{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
-    - "httpd.{{ ansible_distribution }}.yml"
-    - "httpd.default.yml"
-
 - name: install software
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ httpd_packages }}"
+    - "{{ httpd_packages[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(httpd_packages[ansible_distribution]
+      | default(httpd_packages['default'] )) }}"
 
 - name: start and enable software
   service:
@@ -20,6 +15,8 @@
     state: started
     enabled: yes
   with_items:
-    - "{{ httpd_services }}"
+    - "{{ httpd_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(httpd_services[ansible_distribution]
+      | default(httpd_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
