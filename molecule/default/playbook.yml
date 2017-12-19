@@ -4,4 +4,4 @@
   gather_facts: no
 
   roles:
-    - role: robertdebock.httpd
+    - role: ansible-role-httpd
