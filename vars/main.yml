@@ -19,3 +19,11 @@ httpd_services:
     - httpd
   Ubuntu:
     - apache2
+
+httpd_directory:
+  Alpine: /etc/apache2/conf.d
+  CentOS: /etc/httpd/conf.d/
+  Debian: /etc/apache2/conf-enabled
+  Fedora: /etc/httpd/conf.d/
+  openSUSE Leap: /etc/apache2/conf.d
+  Ubuntu: /etc/apache2/conf-enabled

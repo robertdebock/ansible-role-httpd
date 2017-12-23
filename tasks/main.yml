@@ -9,6 +9,13 @@
       | default(httpd_packages[ansible_distribution]
       | default(httpd_packages['default'] )) }}"
 
+- name: configure software
+  template:
+    src: templates/application.conf.j2
+    dest: "{{ httpd_directory[ansible_distribution] }}/{{ item.name }}.conf"
+  with_items:
+    - "{{ httpd_applications }}"
+
 - name: start and enable software
   service:
     name: "{{ item }}"

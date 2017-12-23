@@ -13,7 +13,7 @@ Access to a repository containing packages, likely on the internet.
 Role Variables
 --------------
 
-None known.
+- httpd_applications: a list of applications that will (reversed) proxy to the "backend_url". (See example for more details.)
 
 Dependencies
 ------------
@@ -32,7 +32,14 @@ Example Playbook
 - hosts: servers
 
   roles:
-    - robertdebock.httpd
+    - role: robertdebock.httpd
+      httpd_applications:
+        - name: myapplication
+          location: /myapplication
+          backend_url: http://localhost:8080/myapplication
+        - name: myotherapp
+          location: myotherapp
+          backend_url: http://localhost:8080/myotherapp
 
   tasks:
     - name: place content
