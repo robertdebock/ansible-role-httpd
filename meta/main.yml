@@ -33,7 +33,7 @@ galaxy_info:
     - apache
     - httpd
     - installer
-    - pacakge
+    - package
     - Alpine
     - CentOS
     - Debian
