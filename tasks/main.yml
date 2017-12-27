@@ -9,6 +9,14 @@
       | default(httpd_packages[ansible_distribution]
       | default(httpd_packages['default'] )) }}"
 
+- name: allowing httpd to connect
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+  when:
+    - ansible_virtualization_type != "docker"
+
 - name: configure software
   template:
     src: templates/application.conf.j2
