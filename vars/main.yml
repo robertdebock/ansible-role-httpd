@@ -7,6 +7,8 @@ httpd_packages:
     - apache2
   default:
     - httpd
+  OpenSUSE Leap:
+    - apache2
   Ubuntu:
     - apache2
 
@@ -17,6 +19,8 @@ httpd_services:
     - apache2
   default:
     - httpd
+  openSUSE Leap:
+    - apache2
   Ubuntu:
     - apache2
 

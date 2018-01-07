@@ -15,7 +15,8 @@
     state: yes
     persistent: yes
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_selinux is defined
+    - ansible_selinux.status == "enabled"
 
 - name: configure software
   template:
@@ -25,6 +26,8 @@
     - "{{ httpd_applications }}"
   notify:
     - restart software
+  when:
+    - httpd_applications is defined
 
 - name: start and enable software
   service:
