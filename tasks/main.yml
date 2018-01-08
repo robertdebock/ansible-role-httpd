@@ -15,7 +15,7 @@
     state: yes
     persistent: yes
   when:
-    - ansible_selinux is defined
+    - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
 
 - name: configure software
