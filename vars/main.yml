@@ -3,6 +3,8 @@
 httpd_packages:
   Alpine:
     - apache2
+  Archlinux:
+    - apache
   Debian:
     - apache2
   default:
@@ -26,8 +28,9 @@ httpd_services:
 
 httpd_directory:
   Alpine: /etc/apache2/conf.d
-  CentOS: /etc/httpd/conf.d/
+  Archlinux: /etc/httpd/conf/extra
+  CentOS: /etc/httpd/conf.d
   Debian: /etc/apache2/conf-enabled
-  Fedora: /etc/httpd/conf.d/
+  Fedora: /etc/httpd/conf.d
   openSUSE Leap: /etc/apache2/conf.d
   Ubuntu: /etc/apache2/conf-enabled
