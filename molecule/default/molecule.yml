@@ -8,6 +8,8 @@ driver:
 lint:
   name: yamllint
 platforms:
+  - name: httpd-archlinux
+    image: base/archlinux
   - name: httpd-alpine-3.6
     image: alpine:3.6
   - name: httpd-alpine-3.7
@@ -18,6 +20,8 @@ platforms:
     image: centos:7
   - name: httpd-debian-jessie
     image: debian:jessie
+  - name: httpd-debian-stretch
+    image: debian:stretch
   - name: httpd-debian-buster
     image: debian:buster
   - name: httpd-fedora-26
@@ -28,8 +32,13 @@ platforms:
     image: opensuse:42.2
   - name: httpd-opensuse-42.3
     image: opensuse:42.3
-  - name: httpd-ubuntu-zesty
-    image: ubuntu:zesty
+    # 14.04 LTS
+  - name: httpd-ubuntu-trusty
+    image: ubuntu:trusty
+    # 16.04 LTS
+  - name: httpd-ubuntu-xenial
+    image: ubuntu:xenial
+    # 17.04
   - name: httpd-ubuntu-artful
     image: ubuntu:artful
 provisioner:
