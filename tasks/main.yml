@@ -18,7 +18,7 @@
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
 
-- name: configure software
+- name: configure application
   template:
     src: templates/application.conf.j2
     dest: "{{ httpd_directory[ansible_distribution] }}/{{ item.name }}.conf"
