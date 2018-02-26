@@ -25,7 +25,7 @@
   with_items:
     - "{{ httpd_applications }}"
   notify:
-    - restart software
+    - restart httpd
   when:
     - httpd_applications is defined
 

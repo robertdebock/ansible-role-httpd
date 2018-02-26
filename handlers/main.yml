@@ -1,6 +1,6 @@
 ---
 # handlers file for httpd
-- name: restart software
+- name: restart httpd
   service:
     name: "{{ item }}"
     state: restarted
