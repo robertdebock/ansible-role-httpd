@@ -5,6 +5,7 @@
   strategy: free
 
   roles:
+    - role: robertdebock.bootstrap
     - role: ansible-role-httpd
       httpd_applications:
         - name: myapplication
