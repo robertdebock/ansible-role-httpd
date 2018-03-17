@@ -18,6 +18,38 @@
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
 
+- name: create ssl directory
+  file:
+    path: "{{ httpd_directory[ansible_distribution] }}/ssl"
+    state: directory
+
+- name: create ssl key
+  openssl_privatekey:
+    path: "{{ httpd_directory[ansible_distribution] }}/ssl/{{ httpd_ssl_servername }}.key"
+  register: key
+
+- name: create ssl csr
+  openssl_csr:
+    path: "{{ httpd_directory[ansible_distribution] }}/ssl/{{ httpd_ssl_servername }}.csr"
+    privatekey_path: "{{ key.filename }}"
+    common_name: www.ansible.com
+  register: csr
+
+- name: create ssl certificates
+  openssl_certificate:
+    path: "{{ httpd_directory[ansible_distribution] }}/ssl/{{ httpd_ssl_servername }}.crt"
+    privatekey_path: "{{ csr.privatekey }}"
+    csr_path: "{{ csr.filename }}"
+    provider: selfsigned
+
+- name: configure ssl
+  template:
+    src: templates/ssl.conf.j2
+    dest: "{{ httpd_directory[ansible_distribution] }}/conf.d/ssl.conf"
+  notify:
+    - restart httpd
+  validate: 'apachectl -t -f %s'
+
 - name: configure application
   template:
     src: templates/application.conf.j2

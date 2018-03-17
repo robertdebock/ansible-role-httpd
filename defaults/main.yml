@@ -1,2 +1,8 @@
 ---
 # defaults file for httpd
+
+# To configure https, set the hostname to listen to.
+httpd_ssl_servername: "{{ ansible_fqdn }}"
+
+# For SSL a TCP port is required.
+httpd_ssl_port: 443

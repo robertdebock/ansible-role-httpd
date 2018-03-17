@@ -10,24 +10,24 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-centos-6
-    box: centos/6
+  # - name: httpd-centos-6
+  #   box: centos/6
   - name: httpd-centos-7
     box: centos/7
-  - name: httpd-debian-jessie64
-    box: debian/jessie64
-  - name: httpd-debian-buster64
-    box: desc/buster64
-  - name: httpd-fedora-26-cloud-base
-    box: fedora/26-cloud-base
-  - name: httpd-fedora-27-cloud-base
-    box: fedora/27-cloud-base
-  - name: httpd-opensuse-openSUSE-42-2-x86-64
-    box: opensuse/openSUSE-42.2-x86_64
-  - name: httpd-ubuntu-trusty
-    box: ubuntu/trusty64
-  - name: httpd-ubuntu-artful
-    box: ubuntu/artful64
+  # - name: httpd-debian-jessie64
+  #   box: debian/jessie64
+  # - name: httpd-debian-buster64
+  #   box: desc/buster64
+  # - name: httpd-fedora-26-cloud-base
+  #   box: fedora/26-cloud-base
+  # - name: httpd-fedora-27-cloud-base
+  #   box: fedora/27-cloud-base
+  # - name: httpd-opensuse-openSUSE-42-2-x86-64
+  #   box: opensuse/openSUSE-42.2-x86_64
+  # - name: httpd-ubuntu-trusty
+  #   box: ubuntu/trusty64
+  # - name: httpd-ubuntu-artful
+  #   box: ubuntu/artful64
 provisioner:
   name: ansible
   lint:

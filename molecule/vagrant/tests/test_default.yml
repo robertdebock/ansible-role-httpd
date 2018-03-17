@@ -6,3 +6,17 @@ file:
     exists: True
     owner: root
     group: root
+port:
+  tcp:80:
+    listening: true
+    ip:
+      - 0.0.0.0
+  tcp:443:
+    listening: true
+    ip:
+      - 0.0.0.0
+http:
+  http://localhost:
+    status: 200
+  https://localhost:
+    status: 200
