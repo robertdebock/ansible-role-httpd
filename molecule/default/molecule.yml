@@ -16,8 +16,6 @@ platforms:
     image: alpine:3.7
   - name: httpd-centos-7
     image: centos:7
-  - name: httpd-debian-jessie
-    image: debian:jessie
   - name: httpd-debian-stretch
     image: debian:stretch
   - name: httpd-debian-buster
