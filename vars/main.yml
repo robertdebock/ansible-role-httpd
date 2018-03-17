@@ -9,8 +9,10 @@ httpd_packages:
     - apache2
   default:
     - httpd
-  OpenSUSE Leap:
-    - apache2
+    - mod_ssl
+    - openssl
+  openSUSE Leap:
+    - httpd
   Ubuntu:
     - apache2
 
