@@ -10,9 +10,9 @@ lint:
 platforms:
   - name: httpd-archlinux
     image: base/archlinux
-  - name: python-pip-alpine-3.6
+  - name: httpd-alpine-3.6
     image: alpine:3.6
-  - name: python-pip-alpine-3.7
+  - name: httpd-alpine-3.7
     image: alpine:3.7
   - name: httpd-centos-7
     image: centos:7

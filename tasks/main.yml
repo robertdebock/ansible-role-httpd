@@ -45,7 +45,7 @@
 - name: configure ssl
   template:
     src: templates/ssl.conf.j2
-    dest: "{{ httpd_directory[ansible_distribution] }}/conf.d/ssl.conf"
+    dest: "{{ httpd_directory[ansible_distribution] }}/ssl.conf"
   notify:
     - restart httpd
   validate: 'apachectl -t -f %s'
