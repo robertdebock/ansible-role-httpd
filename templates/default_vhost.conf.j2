@@ -1,0 +1,6 @@
+NameVirtualHost *:{{ httpd_port }}
+<VirtualHost *:{{ httpd_port }}>
+   ServerName {{ httpd_servername }}
+   DocumentRoot "{{ httpd_data_directory[ansible_distribution] }}"
+   Redirect permanent / https://{{ httpd_servername }}
+</VirtualHost>

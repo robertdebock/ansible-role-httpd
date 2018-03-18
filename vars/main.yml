@@ -28,7 +28,7 @@ httpd_services:
   Ubuntu:
     - apache2
 
-httpd_directory:
+httpd_config_directory:
   Alpine: /etc/apache2/conf.d
   Archlinux: /etc/httpd/conf/extra
   CentOS: /etc/httpd/conf.d
@@ -36,3 +36,12 @@ httpd_directory:
   Fedora: /etc/httpd/conf.d
   openSUSE Leap: /etc/apache2/conf.d
   Ubuntu: /etc/apache2/conf-enabled
+
+httpd_data_directory:
+  Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+  Archlinux: /srv/http
+  CentOS: /var/www/html
+  Debian: /var/www/html
+  Fedora: /var/www/html
+  openSUSE Leap: /src/www/htdocs
+  Ubuntu: /var/www/html
