@@ -32,7 +32,7 @@
   openssl_csr:
     path: "{{ httpd_config_directory[ansible_distribution] }}/ssl/{{ httpd_ssl_servername }}.csr"
     privatekey_path: "{{ key.filename }}"
-    common_name: www.ansible.com
+    common_name: "{{ ansible_fqdn }}"
   register: csr
 
 - name: create ssl certificates
