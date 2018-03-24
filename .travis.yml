@@ -14,6 +14,8 @@ env:
   - version=">=2.5,<2.6" distro=centos-7
   - version=">=2.4,<2.5" distro=debian-buster
   - version=">=2.5,<2.6" distro=debian-buster
+  - version=">=2.4,<2.5" distro=debian-sid
+  - version=">=2.5,<2.6" distro=debian-sid
   - version=">=2.4,<2.5" distro=debian-stretch
   - version=">=2.5,<2.6" distro=debian-stretch
   - version=">=2.4,<2.5" distro=fedora-26
