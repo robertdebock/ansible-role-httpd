@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-debian-buster
-    image: debian:buster
+  - name: httpd-debian-wheezy
+    image: debian:wheezy
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: debian-buster
+  name: debian-wheezy
   test_sequence:
     - lint
     - destroy
