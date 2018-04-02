@@ -47,8 +47,8 @@ This role has been tested against the following distributions and Ansible versio
 |archlinux|no|yes|yes|
 |centos-6|no|no|no|
 |centos-7|np|yes|yes|
-|debian-buster|no|no|no|
-|debian-jessie|no|yes|yes|
+|debian-buster|no|yes|yes|
+|debian-jessie|no|no|no|
 |debian-stretch|no|yes|yes|
 |debian-wheezy|no|no|no|
 |fedora-26|no|yes|yes|
