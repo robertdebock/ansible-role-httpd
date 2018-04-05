@@ -7,8 +7,6 @@
     - role: robertdebock.bootstrap
     - role: robertdebock.buildtools
     - role: robertdebock.python-pip
-      python_pip_modules:
-        - name: pyopenssl
     - role: ansible-role-httpd
       httpd_applications:
         - name: myapplication

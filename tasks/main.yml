@@ -9,6 +9,10 @@
       | default(httpd_packages[ansible_distribution]
       | default(httpd_packages['default'] )) }}"
 
+- name: install requirements
+  pip:
+    name: pyopenssl
+
 - name: allowing httpd to connect
   seboolean:
     name: httpd_can_network_connect

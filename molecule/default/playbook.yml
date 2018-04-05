@@ -9,8 +9,6 @@
     - role: robertdebock.epel
     - role: robertdebock.scl
     - role: robertdebock.python-pip
-      python_pip_modules:
-        - name: pyopenssl
     - role: ansible-role-httpd
       httpd_applications:
         - name: myapplication
