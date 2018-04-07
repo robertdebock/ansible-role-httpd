@@ -21,7 +21,11 @@ Access to a repository containing packages, likely on the internet.
 Role Variables
 --------------
 
-- httpd_applications: a list of applications that will (reversed) proxy to the "backend_url". (See example for more details.)
+- httpd_applications: a list of applications that will (reversed) proxy to the "backend_url". (See example for more details.) By default this varialbe is not set.
+- httpd_servername: The hostname to redirect to. Defaults to "{{ ansible_fqdn }}".
+- httpd_port: The plain text TCP port to listen on. Defaults to 80.
+- httpd_ssl_servername: The Common Name (CN) to sign ssl certificates with. Defaults to "{{ ansible_fqdn }}".
+- httpd_ssl_port: The encrypted TCP port to listen on. Defaults to 443.
 
 Dependencies
 ------------
