@@ -1,47 +1,41 @@
 ---
 # vars file for httpd
-httpd_packages:
+httpd_configuration:
   Alpine:
-    - apache2
+    packages:
+      - apache2
+    service: apache2
+    config_directory: /etc/apache2/conf.d
+    data_directory: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
   Archlinux:
-    - apache
+    packages:
+      - apache
+    service: httpd
+    config_directory: /etc/httpd/conf/extra
+    data_directory: /srv/http
+  CentOS:
+    packages:
+      - httpd
+      - mod_ssl
+      - openssl
+    service: httpd
+    config_directory: /etc/httpd/conf.d
+    data_directory: /var/www/html
   Debian:
-    - apache2
-  default:
-    - httpd
-    - mod_ssl
-    - openssl
+    packages:
+      - apache2
+    service: apache2
+    config_directory: /etc/apache2/conf-enabled
+    data_directory: /var/www/html
   openSUSE Leap:
-    - httpd
+    packages:
+      - httpd
+    service: apache2
+    config_directory: /etc/apache2/conf.d
+    data_directory: /src/www/htdocs
   Ubuntu:
-    - apache2
-
-httpd_services:
-  Alpine:
-    - apache2
-  Debian:
-    - apache2
-  default:
-    - httpd
-  openSUSE Leap:
-    - apache2
-  Ubuntu:
-    - apache2
-
-httpd_config_directory:
-  Alpine: /etc/apache2/conf.d
-  Archlinux: /etc/httpd/conf/extra
-  CentOS: /etc/httpd/conf.d
-  Debian: /etc/apache2/conf-enabled
-  Fedora: /etc/httpd/conf.d
-  openSUSE Leap: /etc/apache2/conf.d
-  Ubuntu: /etc/apache2/conf-enabled
-
-httpd_data_directory:
-  Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
-  Archlinux: /srv/http
-  CentOS: /var/www/html
-  Debian: /var/www/html
-  Fedora: /var/www/html
-  openSUSE Leap: /src/www/htdocs
-  Ubuntu: /var/www/html
+    packages:
+      - apache2
+    service: apache2
+    config_directory: /etc/apache2/conf-enabled
+    data_directory: /var/www/html
