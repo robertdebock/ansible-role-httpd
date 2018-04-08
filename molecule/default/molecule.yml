@@ -52,7 +52,7 @@ scenario:
     - prepare
     - converge
     - idempotence
-#    - check
+    - check
     - side_effect
     - verify
     - destroy
