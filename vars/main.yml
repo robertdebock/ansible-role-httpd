@@ -27,6 +27,14 @@ httpd_configuration:
     service: apache2
     config_directory: /etc/apache2/conf-enabled
     data_directory: /var/www/html
+  Fedora:
+    packages:
+      - httpd
+      - mod_ssl
+      - openssl
+    service: httpd
+    config_directory: /etc/httpd/conf.d
+    data_directory: /var/www/html
   openSUSE Leap:
     packages:
       - httpd
