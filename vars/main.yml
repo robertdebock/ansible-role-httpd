@@ -4,6 +4,7 @@ httpd_configuration:
   Alpine:
     packages:
       - apache2
+      - apache2-ctl
     service: apache2
     config_directory: /etc/apache2/conf.d
     data_directory: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
