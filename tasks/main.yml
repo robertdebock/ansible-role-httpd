@@ -48,7 +48,7 @@
   template:
     src: templates/ssl.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl.conf"
-    validate: 'apachectl -t -f %s'
+    validate: '/usr/sbin/apachectl -t -f %s'
   notify:
     - restart httpd
 
@@ -56,7 +56,7 @@
   template:
     src: templates/application.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/{{ item.name }}.conf"
-    validate: 'apachectl -t -f %s'
+    validate: '/usr/sbin/apachectl -t -f %s'
   with_items:
     - "{{ httpd_applications }}"
   notify:
@@ -68,7 +68,7 @@
   template:
     src: templates/default_vhost.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/default_vhost.conf"
-    validate: 'apachectl -t -f %s'
+    validate: '/usr/sbin/apachectl -t -f %s'
   notify:
     - restart httpd
 
