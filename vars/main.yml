@@ -5,9 +5,11 @@ httpd_configuration:
     binary: /usr/sbin/httpd
     packages:
       - apache2
+      - apache2-ssl
     service: apache2
     config_directory: /etc/apache2/conf.d
     data_directory: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+    mod_ssl: modules/mod_ssl.so
   Archlinux:
     binary: /usr/sbin/httpd
     packages:
@@ -15,6 +17,7 @@ httpd_configuration:
     service: httpd
     config_directory: /etc/httpd/conf/extra
     data_directory: /srv/http
+    mod_ssl: modules/mod_ssl.so
   CentOS:
     binary: /usr/sbin/httpd
     packages:
@@ -24,6 +27,7 @@ httpd_configuration:
     service: httpd
     config_directory: /etc/httpd/conf.d
     data_directory: /var/www/html
+    mod_ssl: modules/mod_ssl.so
   Debian:
     binary: /usr/sbin/apache2
     packages:
@@ -31,6 +35,7 @@ httpd_configuration:
     service: apache2
     config_directory: /etc/apache2/conf-enabled
     data_directory: /var/www/html
+    mod_ssl: /usr/lib/apache2/modules/mod_ssl.so
   Fedora:
     binary: /usr/sbin/httpd
     packages:
@@ -40,6 +45,7 @@ httpd_configuration:
     service: httpd
     config_directory: /etc/httpd/conf.d
     data_directory: /var/www/html
+    mod_ssl: modules/mod_ssl.so
   openSUSE Leap:
     binary: /usr/sbin/httpd
     packages:
@@ -47,6 +53,7 @@ httpd_configuration:
     service: apache2
     config_directory: /etc/apache2/conf.d
     data_directory: /src/www/htdocs
+    mod_ssl: modules/mod_ssl.so
   Ubuntu:
     binary: /usr/sbin/apache2
     packages:
@@ -54,3 +61,4 @@ httpd_configuration:
     service: apache2
     config_directory: /etc/apache2/conf-enabled
     data_directory: /var/www/html
+    mod_ssl: /usr/lib/apache2/modules/mod_ssl.so
