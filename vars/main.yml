@@ -2,18 +2,21 @@
 # vars file for httpd
 httpd_configuration:
   Alpine:
+    binary: /usr/sbin/httpd
     packages:
       - apache2
     service: apache2
     config_directory: /etc/apache2/conf.d
     data_directory: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
   Archlinux:
+    binary: /usr/sbin/httpd
     packages:
       - apache
     service: httpd
     config_directory: /etc/httpd/conf/extra
     data_directory: /srv/http
   CentOS:
+    binary: /usr/sbin/httpd
     packages:
       - httpd
       - mod_ssl
@@ -22,12 +25,14 @@ httpd_configuration:
     config_directory: /etc/httpd/conf.d
     data_directory: /var/www/html
   Debian:
+    binary: /usr/sbin/apache2
     packages:
       - apache2
     service: apache2
     config_directory: /etc/apache2/conf-enabled
     data_directory: /var/www/html
   Fedora:
+    binary: /usr/sbin/httpd
     packages:
       - httpd
       - mod_ssl
@@ -36,12 +41,14 @@ httpd_configuration:
     config_directory: /etc/httpd/conf.d
     data_directory: /var/www/html
   openSUSE Leap:
+    binary: /usr/sbin/httpd
     packages:
       - httpd
     service: apache2
     config_directory: /etc/apache2/conf.d
     data_directory: /src/www/htdocs
   Ubuntu:
+    binary: /usr/sbin/apache2
     packages:
       - apache2
     service: apache2
