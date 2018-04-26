@@ -61,6 +61,8 @@
     - restart httpd
   when:
     - httpd_applications is defined
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: configure redirect from http to https
   template:
