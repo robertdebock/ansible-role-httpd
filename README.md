@@ -60,8 +60,7 @@ This role has been tested against the following distributions and Ansible versio
 |opensuse-42.2|no|yes|yes|
 |opensuse-42.3|no|yes|yes|
 |ubuntu-artful|no|yes|yes|
-|ubuntu-trusty|no|yes|yes|
-|ubuntu-xenial|no|yes|yes|
+|ubuntu-bionic|no|yes|yes|
 
 Example Playbook
 ----------------

@@ -28,15 +28,10 @@ platforms:
     image: opensuse:42.2
   - name: httpd-opensuse-42.3
     image: opensuse:42.3
-    # 17.04
   - name: httpd-ubuntu-artful
     image: ubuntu:artful
-    # 14.04 LTS
-  - name: httpd-ubuntu-trusty
-    image: ubuntu:trusty
-    # 16.04 LTS
-  - name: httpd-ubuntu-xenial
-    image: ubuntu:xenial
+  - name: httpd-ubuntu-bionic
+    image: ubuntu:bionic
 provisioner:
   name: ansible
   lint:
