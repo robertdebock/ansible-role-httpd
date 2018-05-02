@@ -20,10 +20,10 @@ platforms:
     image: debian:buster
   - name: httpd-debian-stretch
     image: debian:stretch
-  - name: httpd-fedora-26
-    image: fedora:26
   - name: httpd-fedora-27
     image: fedora:27
+  - name: httpd-fedora-28
+    image: fedora:28
   - name: httpd-opensuse-42.2
     image: opensuse:42.2
   - name: httpd-opensuse-42.3
