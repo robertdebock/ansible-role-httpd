@@ -46,14 +46,14 @@
 
 - name: configure ssl
   template:
-    src: templates/ssl.conf.j2
+    src: ssl.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl.conf"
   notify:
     - restart httpd
 
 - name: configure application
   template:
-    src: templates/application.conf.j2
+    src: application.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/{{ item.name }}.conf"
   with_items:
     - "{{ httpd_applications }}"
@@ -66,7 +66,7 @@
 
 - name: configure redirect from http to https
   template:
-    src: templates/default_vhost.conf.j2
+    src: default_vhost.conf.j2
     dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/default_vhost.conf"
   notify:
     - restart httpd
