@@ -32,7 +32,13 @@ Dependencies
 
 This role can be used to prepare your system.
 
-- robertdebock.bootstrap
+- [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
+- [robertdebock.buildtools](https://travis-ci.org/robertdebock/ansible-role-buildtools)
+- [robertdebock.epel](https://travis-ci.org/robertdebock/ansible-role-epel)
+- [robertdebock.httpd](https://travis-ci.org/robertdebock/ansible-role-httpd)
+- [robertdebock.scl](https://travis-ci.org/robertdebock/ansible-role-scl)
+- [robertdebock.python-pip](https://travis-ci.org/robertdebock/ansible-role-python-pip)
+- [robertdebock.update](https://travis-ci.org/robertdebock/ansible-role-updatebootstrap)
 
 Download the dependencies by issuing this command:
 ```
