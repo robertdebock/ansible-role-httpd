@@ -73,20 +73,20 @@ Example Playbook
 ```
 - hosts: servers
 
-roles:
-  - role: robertdebock.bootstrap
-  - role: robertdebock.buildtools
-  - role: robertdebock.epel
-  - role: robertdebock.scl
-  - role: robertdebock.python-pip
-  - role: ansible-role-httpd
-    httpd_applications:
-      - name: myapplication
-        location: /myapplication
-        backend_url: http://localhost:8080/myapplication
-      - name: myotherapp
-        location: myotherapp
-        backend_url: http://localhost:8080/myotherapp
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.buildtools
+    - role: robertdebock.epel
+    - role: robertdebock.scl
+    - role: robertdebock.python-pip
+    - role: ansible-role-httpd
+      httpd_applications:
+        - name: myapplication
+          location: /myapplication
+          backend_url: http://localhost:8080/myapplication
+        - name: myotherapp
+          location: myotherapp
+          backend_url: http://localhost:8080/myotherapp
 
   tasks:
     - name: place content
