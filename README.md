@@ -11,7 +11,7 @@ This role is a part of many compatible roles. Have a look at [the documentation 
 
 Here is an overview of related roles:
 
-![dependencies](https://raw.githubusercontent.com/robertdebock/robertdebock.github.io/artifacts/httpd.png "Dependency")
+![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/httpd.png "Dependency")
 
 Requirements
 ------------
