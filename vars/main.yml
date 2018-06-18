@@ -1,5 +1,8 @@
 ---
 # vars file for httpd
+httpd_requirements:
+  - pyopenssl
+
 httpd_configuration:
   Alpine:
     binary: /usr/sbin/httpd

@@ -9,7 +9,9 @@
 
 - name: install requirements
   pip:
-    name: pyopenssl
+    name: "{{ item }}"
+  with_items:
+    - "{{ httpd_requirements }}"
 
 - name: allowing httpd to connect
   seboolean:
