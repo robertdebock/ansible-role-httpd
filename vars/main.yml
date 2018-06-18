@@ -3,6 +3,9 @@
 httpd_requirements:
   - pyopenssl
 
+httpd_sebooleans:
+  - httpd_can_network_connect
+
 httpd_configuration:
   Alpine:
     binary: /usr/sbin/httpd
