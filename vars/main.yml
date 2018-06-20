@@ -60,6 +60,14 @@ httpd_configuration:
     config_directory: /etc/apache2/conf.d
     data_directory: /src/www/htdocs
     mod_ssl: modules/mod_ssl.so
+  openSUSE Tumbleweed:
+    binary: /usr/sbin/httpd
+    packages:
+      - httpd
+    service: apache2
+    config_directory: /etc/apache2/conf.d
+    data_directory: /src/www/htdocs
+    mod_ssl: modules/mod_ssl.so
   Ubuntu:
     binary: /usr/sbin/apache2
     packages:
