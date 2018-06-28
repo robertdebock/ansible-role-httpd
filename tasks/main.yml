@@ -1,11 +1,21 @@
 ---
 # tasks file for httpd
+- name: load default variables
+  include_vars:
+    file: default.yml
+
+- name: load os-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - default.yml
+
 - name: install software
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ httpd_configuration[ansible_distribution]['packages'] }}"
+    - "{{ httpd_packages }}"
 
 - name: install requirements
   pip:
@@ -31,19 +41,19 @@
 
 - name: create ssl key
   openssl_privatekey:
-    path: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl/{{ httpd_ssl_servername }}.key"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
   register: key
 
 - name: create ssl csr
   openssl_csr:
-    path: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl/{{ httpd_ssl_servername }}.csr"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.csr"
     privatekey_path: "{{ key.filename }}"
     common_name: "{{ httpd_ssl_servername }}"
   register: csr
 
 - name: create ssl certificates
   openssl_certificate:
-    path: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl/{{ httpd_ssl_servername }}.crt"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
     privatekey_path: "{{ csr.privatekey }}"
     csr_path: "{{ csr.filename }}"
     provider: selfsigned
@@ -51,14 +61,14 @@
 - name: configure ssl
   template:
     src: ssl.conf.j2
-    dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl.conf"
+    dest: "{{ httpd_config_directory }}/ssl.conf"
   notify:
     - restart httpd
 
 - name: configure application
   template:
     src: application.conf.j2
-    dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/{{ item.name }}.conf"
+    dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
   with_items:
     - "{{ httpd_applications }}"
   notify:
@@ -71,7 +81,7 @@
 - name: configure redirect from http to https
   template:
     src: default_vhost.conf.j2
-    dest: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/default_vhost.conf"
+    dest: "{{ httpd_config_directory }}/default_vhost.conf"
   notify:
     - restart httpd
 
@@ -81,6 +91,6 @@
     state: started
     enabled: yes
   with_items:
-    - "{{ httpd_configuration[ansible_distribution]['service'] }}"
+    - "{{ httpd_service }}"
   when:
     - ansible_virtualization_type != "docker"

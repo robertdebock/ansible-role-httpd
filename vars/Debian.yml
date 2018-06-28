@@ -1,0 +1,8 @@
+---
+# vars file for httpd
+httpd_binary: /usr/sbin/apache2
+httpd_packages:
+      - apache2
+httpd_service: apache2
+httpd_config_directory: /etc/apache2/conf-enabled
+httpd_mod_ssl: /usr/lib/apache2/modules/mod_ssl.so

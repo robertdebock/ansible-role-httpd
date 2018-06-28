@@ -1,0 +1,9 @@
+---
+# vars file for httpd
+httpd_packages:
+      - apache2
+      - apache2-ssl
+httpd_service: apache2
+httpd_config_directory: /etc/apache2/conf.d
+httpd_data_directory: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+httpd_mod_ssl: modules/mod_ssl.so

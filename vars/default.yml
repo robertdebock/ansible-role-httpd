@@ -1,0 +1,15 @@
+---
+# vars file for httpd
+httpd_requirements:
+  - pyopenssl
+httpd_sebooleans:
+  - httpd_can_network_connect
+httpd_binary: /usr/sbin/httpd
+httpd_packages:
+  - httpd
+  - mod_ssl
+  - openssl
+httpd_service: httpd
+httpd_config_directory: /etc/httpd/conf.d
+httpd_data_directory: /var/www/html
+httpd_mod_ssl: modules/mod_ssl.so

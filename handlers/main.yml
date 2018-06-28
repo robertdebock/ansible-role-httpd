@@ -5,6 +5,6 @@
     name: "{{ item }}"
     state: restarted
   with_items:
-    - "{{ httpd_configuration[ansible_distribution]['service'] }}"
+    - "{{ httpd_service }}"
   when:
     - ansible_virtualization_type != "docker"

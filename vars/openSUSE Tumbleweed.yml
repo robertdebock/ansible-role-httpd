@@ -1,0 +1,7 @@
+---
+# vars file for httpd
+httpd_packages:
+  - httpd
+httpd_service: apache2
+httpd_config_directory: /etc/apache2/conf.d
+httpd_data_directory: /src/www/htdocs

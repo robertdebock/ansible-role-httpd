@@ -1,0 +1,7 @@
+---
+# vars file for httpd
+httpd_packages:
+  - apache
+httpd_config_directory: /etc/httpd/conf/extra
+httpd_data_directory: /srv/http
+httpd_mod_ssl: modules/mod_ssl.so
