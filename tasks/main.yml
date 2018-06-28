@@ -36,7 +36,7 @@
 
 - name: create ssl directory
   file:
-    path: "{{ httpd_configuration[ansible_distribution]['config_directory'] }}/ssl"
+    path: "{{ httpd_config_directory }}/ssl"
     state: directory
 
 - name: create ssl key
