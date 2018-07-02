@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-alpine-3.6
-    image: alpine:3.6
+  - name: httpd-fedora-latest
+    image: fedora:latest
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: alpine-3.6
+  name: fedora-latest
 verifier:
   name: goss
   lint:

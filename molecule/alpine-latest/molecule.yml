@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-ubuntu-bionic
-    image: ubuntu:bionic
+  - name: httpd-alpine-latest
+    image: alpine:latest
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: ubuntu-bionic
+  name: alpine-latest
 verifier:
   name: goss
   lint:

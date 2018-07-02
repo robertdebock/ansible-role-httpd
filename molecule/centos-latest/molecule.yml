@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-debian-buster
-    image: debian:buster
+  - name: httpd-centos-latest
+    image: centos:latest
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: debian-buster
+  name: centos-latest
 verifier:
   name: goss
   lint:
