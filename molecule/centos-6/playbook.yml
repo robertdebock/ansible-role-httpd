@@ -8,7 +8,7 @@
     - role: robertdebock.buildtools
     - role: robertdebock.epel
     - role: robertdebock.scl
-    - role: robertdebock.python-pip
+    - role: robertdebock.python_pip
     - role: ansible-role-httpd
       httpd_applications:
         - name: myapplication

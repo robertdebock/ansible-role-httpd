@@ -37,7 +37,7 @@ This role can be used to prepare your system.
 - [robertdebock.epel](https://travis-ci.org/robertdebock/ansible-role-epel)
 - [robertdebock.httpd](https://travis-ci.org/robertdebock/ansible-role-httpd)
 - [robertdebock.scl](https://travis-ci.org/robertdebock/ansible-role-scl)
-- [robertdebock.python-pip](https://travis-ci.org/robertdebock/ansible-role-python-pip)
+- [robertdebock.python_pip](https://travis-ci.org/robertdebock/ansible-role-python_pip)
 - [robertdebock.update](https://travis-ci.org/robertdebock/ansible-role-updatebootstrap)
 
 Download the dependencies by issuing this command:
@@ -78,7 +78,7 @@ Example Playbook
     - role: robertdebock.buildtools
     - role: robertdebock.epel
     - role: robertdebock.scl
-    - role: robertdebock.python-pip
+    - role: robertdebock.python_pip
     - role: ansible-role-httpd
       httpd_applications:
         - name: myapplication
