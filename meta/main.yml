@@ -41,7 +41,7 @@ galaxy_info:
     - installer
     - package
     - alpine
-    - centOS
+    - centos
     - debian
     - fedora
     - rhel
