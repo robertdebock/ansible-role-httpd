@@ -33,12 +33,9 @@ Dependencies
 This role can be used to prepare your system.
 
 - [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
-- [robertdebock.buildtools](https://travis-ci.org/robertdebock/ansible-role-buildtools)
 - [robertdebock.epel](https://travis-ci.org/robertdebock/ansible-role-epel)
 - [robertdebock.httpd](https://travis-ci.org/robertdebock/ansible-role-httpd)
-- [robertdebock.scl](https://travis-ci.org/robertdebock/ansible-role-scl)
 - [robertdebock.python_pip](https://travis-ci.org/robertdebock/ansible-role-python_pip)
-- [robertdebock.update](https://travis-ci.org/robertdebock/ansible-role-updatebootstrap)
 
 Download the dependencies by issuing this command:
 ```
@@ -50,22 +47,21 @@ Compatibility
 
 This role has been tested against the following distributions and Ansible version:
 
-|distribution|ansible 2.3|ansible 2.4|ansible 2.5|
+|distribution|ansible 2.4|ansible 2.5|ansible 2.6|
 |------------|-----------|-----------|-----------|
-|alpine-latest|no|yes|yes|
-|alpine-edge|no|yes|yes|
-|archlinux|no|yes|yes|
+|alpine-edge|yes|yes|yes|
+|alpine-latest|yes|yes|yes|
+|archlinux|yes|yes|yes|
 |centos-6|no|no|no|
-|centos-latest|np|yes|yes|
-|debian-stable|no|yes|yes|
-|debian-latest|no|yes|yes|
-|debian-wheezy|no|no|no|
-|fedora-latest|no|yes|yes|
-|fedora-rawhide|no|yes|yes|
-|opensuse-leap|no|yes|yes|
-|opensuse-tumbleweed|no|yes|yes|
-|ubuntu-artful|no|yes|yes|
-|ubuntu-latest|no|yes|yes|
+|centos-latest|yes|yes|yes|
+|debian-latest|yes|yes|yes|
+|debian-stable|yes|yes|yes|
+|fedora-latest|yes|yes|yes|
+|fedora-rawhide|yes|yes|yes|
+|opensuse-leap|yes|yes|yes|
+|opensuse-tumbleweed|yes|yes|yes|
+|ubuntu-artful|yes|yes|yes|
+|ubuntu-latest|yes|yes|yes|
 
 Example Playbook
 ----------------
@@ -75,9 +71,7 @@ Example Playbook
 
   roles:
     - role: robertdebock.bootstrap
-    - role: robertdebock.buildtools
     - role: robertdebock.epel
-    - role: robertdebock.scl
     - role: robertdebock.python_pip
     - role: ansible-role-httpd
       httpd_applications:
