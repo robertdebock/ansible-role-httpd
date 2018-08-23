@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.python_pip
+    - role: ansible-role-httpd
+      httpd_applications:
+        - name: myapplication
+          location: /myapplication
+          backend_url: http://localhost:8080/myapplication
+        - name: myotherapp
+          location: myotherapp
+          backend_url: http://localhost:8080/myotherapp
