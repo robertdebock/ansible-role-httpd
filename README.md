@@ -74,13 +74,20 @@ Example Playbook
     - role: robertdebock.epel
     - role: robertdebock.python_pip
     - role: ansible-role-httpd
-      httpd_applications:
+      httpd_locations:
         - name: myapplication
           location: /myapplication
           backend_url: http://localhost:8080/myapplication
         - name: myotherapp
           location: myotherapp
           backend_url: http://localhost:8080/myotherapp
+      httpd_vhosts:
+        - name: myvhost
+          documentroot: /var/www/html/myvhost
+          servername: www.example.com
+        - name: myvhostproxy
+          servername: proxy.example.com
+          backend_url: http://localhost:8080/myvhostapp
 
   tasks:
     - name: place content

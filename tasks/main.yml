@@ -64,16 +64,29 @@
   notify:
     - restart httpd
 
-- name: configure application
+- name: configure locations
   template:
-    src: application.conf.j2
+    src: location.conf.j2
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
   with_items:
-    - "{{ httpd_applications }}"
+    - "{{ httpd_locations }}"
   notify:
     - restart httpd
   when:
-    - httpd_applications is defined
+    - httpd_locations is defined
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: configure vhosts
+  template:
+    src: vhost.conf.j2
+    dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
+  with_items:
+    - "{{ httpd_vhosts }}"
+  notify:
+    - restart httpd
+  when:
+    - httpd_vhosts is defined
   loop_control:
     label: "{{ item.name }}"
 
