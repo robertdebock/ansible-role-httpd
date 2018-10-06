@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+<VirtualHost *:{{ httpd_port }}>
+   ServerName {{ item.servername }}
+{% if item.documentroot is defined %}
+   DocumentRoot "{{ item.documtentroot }}"
+{% endif %}
+{% if item.backend_url is defined }}
+   ProxyPreserveHost On
+   ProxyPass / {{ item.backend_url }}
+   ProxyPassReverse / {{ item.backend_url }}
+{% endif %}
+</VirtualHost>

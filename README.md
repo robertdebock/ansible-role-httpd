@@ -5,6 +5,17 @@ httpd
 
 Provides Apache httpd for your system.
 
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-httpd) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-httpd/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+```
+pip install molecule
+molecule test --scenario-name fedora-latest
+```
+There are many scenarios available, please have a look in the `molecule/` directory.
+
 Context
 --------
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
@@ -74,13 +85,20 @@ Example Playbook
     - role: robertdebock.epel
     - role: robertdebock.python_pip
     - role: ansible-role-httpd
-      httpd_applications:
+      httpd_locations:
         - name: myapplication
           location: /myapplication
           backend_url: http://localhost:8080/myapplication
         - name: myotherapp
           location: myotherapp
           backend_url: http://localhost:8080/myotherapp
+      httpd_vhosts:
+        - name: myvhost
+          documentroot: /var/www/html/myvhost
+          servername: www.example.com
+        - name: myvhostproxy
+          servername: proxy.example.com
+          backend_url: http://localhost:8080/myvhostapp
 
   tasks:
     - name: place content

@@ -1,0 +1,58 @@
+---
+# vars file for httpd
+httpd_requirements:
+  - pyopenssl
+
+httpd_sebooleans:
+  - httpd_can_network_connect
+
+httpd_binary:
+  default: /usr/sbin/httpd
+  Debian: /usr/sbin/apache2
+  Ubuntu: /usr/sbin/apache2
+
+httpd_packages:
+  default:
+    - httpd
+    - mod_ssl
+    - openssl
+  Alpine:
+    - apache2
+    - apache2-ssl
+  Archlinux:
+    - apache
+  Debian:
+    - apache2
+  openSUSE Leap:
+    - httpd
+  openSUSE Tumbleweed:
+    - httpd
+  Ubuntu:
+    - apache2
+
+httpd_service:
+  default: httpd
+  Alpine: apache2
+  openSUSE Leap: apache2
+  openSUSE Tumbleweed: apache2
+
+httpd_config_directory:
+  default: /etc/httpd/conf.d
+  Alpine: /etc/apache2/conf.d
+  Archlinux: /etc/httpd/conf/extra
+  Debian: /etc/apache2/conf-enabled
+  openSUSE Leap: /etc/apache2/conf.d
+  openSUSE Tumbleweed: /etc/apache2/conf.d
+  Ubuntu: /etc/apache2/conf-enabled
+
+httpd_data_directory:
+  default: /var/www/html
+  Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+  Archlinux: /src/http
+  openSUSE Leap: /src/www/htdocs
+  openSUSE Tumbleweed: /src/www/htdocs
+
+httpd_mod_ssl:
+  default: modules/mod_ssl.so
+  Debian: /usr/lib/apache2/modules/mod_ssl.so
+  Ubuntu: /usr/lib/apache2/modules/mod_ssl.so
