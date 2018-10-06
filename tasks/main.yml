@@ -1,9 +1,9 @@
 ---
 # tasks file for httpd
-- name: install software
+- name: install apache httpd
   package:
     name: "{{ httpd_packages[ansible_distribution]
-          | default(httpd_packages['default'] }}"
+          | default(httpd_packages['default']) }}"
     state: "{{ httpd_package_state }}"
 
 - name: install requirements
