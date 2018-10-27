@@ -94,7 +94,7 @@
   notify:
     - restart httpd
 
-- name: start and enable software
+- name: start and enable httpd
   service:
     name: "{{ httpd_service[ansible_distribution]
           | default(httpd_service['default']) }}"
