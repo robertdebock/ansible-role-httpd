@@ -5,53 +5,82 @@ httpd
 
 Provides Apache httpd for your system.
 
-[Unit tests](https://travis-ci.org/robertdebock/ansible-role-httpd) are done on every commit and periodically.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-httpd/issues)
+Example Playbook
+----------------
 
-To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+This example is taken from `molecule/default/playbook.yml`:
 ```
-pip install molecule
-molecule test
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+
+  vars:
+    httpd_applications:
+      - name: myapplication
+        location: /myapplication
+        backend_url: http://localhost:8080/myapplication
+      - name: myotherapp
+        location: myotherapp
+        backend_url: http://localhost:8080/myotherapp
+
+  roles:
+    - robertdebock.bootstrap
+    - robertdebock.python_pip
+    - robertdebock.httpd
+
 ```
-There are many scenarios available, please have a look in the `molecule/` directory.
-
-Context
---------
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
-
-Here is an overview of related roles:
-
-![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/httpd.png "Dependency")
-
-Requirements
-------------
-
-Access to a repository containing packages, likely on the internet.
 
 Role Variables
 --------------
 
-- httpd_applications: a list of applications that will (reversed) proxy to the "backend_url". (See example for more details.) By default this varialbe is not set.
-- httpd_servername: The hostname to redirect to. Defaults to "{{ ansible_fqdn }}".
-- httpd_port: The plain text TCP port to listen on. Defaults to 80.
-- httpd_ssl_servername: The Common Name (CN) to sign ssl certificates with. Defaults to "{{ ansible_fqdn }}".
-- httpd_ssl_port: The encrypted TCP port to listen on. Defaults to 443.
+These variables are set in `defaults/main.yml`:
+```
+---
+# defaults file for httpd
 
-Dependencies
+# The servername to use.
+httpd_servername: "{{ ansible_fqdn }}"
+
+# The non-SSL port to use.
+httpd_port: 80
+
+# To configure https, set the hostname to listen to.
+httpd_ssl_servername: "{{ ansible_fqdn }}"
+
+# For SSL a TCP port is required.
+httpd_ssl_port: 443
+
+# To update all packages installed by this roles, set `httpd_package_state` to `latest`.
+httpd_package_state: present
+
+```
+
+Requirements
 ------------
 
-This role can be used to prepare your system.
+- Access to a repository containing packages, likely on the internet.
+- A recent version of Ansible. (Tests run on the last 3 release of Ansible.)
 
-- [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
-- [robertdebock.buildtools](https://travis-ci.org/robertdebock/ansible-role-buildtools) (Only for Alpine systems.)
-- [robertdebock.epel](https://travis-ci.org/robertdebock/ansible-role-epel)
-- [robertdebock.python_pip](https://travis-ci.org/robertdebock/ansible-role-python_pip)
+The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
 
-Download the dependencies by issuing this command:
-```
-ansible-galaxy install --role-file requirements.yml
-```
+---
+- robertdebock.bootstrap
+- robertdebock.buildtools
+- robertdebock.epel
+- robertdebock.scl
+- robertdebock.python_pip
+
+
+Context
+-------
+
+This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
+
+Here is an overview of related roles:
+![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/httpd.png "Dependency")
+
 
 Compatibility
 -------------
@@ -78,45 +107,26 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
-Example Playbook
-----------------
+Testing
+-------
 
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-httpd) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-httpd/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
 ```
-- hosts: centos-7
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.epel
-    - role: robertdebock.python_pip
-    - role: ansible-role-httpd
-      httpd_locations:
-        - name: myapplication
-          location: /myapplication
-          backend_url: http://localhost:8080/myapplication
-        - name: myotherapp
-          location: myotherapp
-          backend_url: http://localhost:8080/myotherapp
-      httpd_vhosts:
-        - name: myvhost
-          documentroot: /var/www/html/myvhost
-          servername: www.example.com
-        - name: myvhostproxy
-          servername: proxy.example.com
-          backend_url: http://localhost:8080/myvhostapp
-
-  tasks:
-    - name: place content
-      copy:
-        src: files/index.html
-        dest: /var/www/html/index.html
+pip install molecule
+molecule test
 ```
+There are many specific scenarios available, please have a look in the `molecule/` directory.
 
-Install this role using `galaxy install robertdebock.httpd`.
 
 License
 -------
 
-Apache License, Version 2.0
+Apache-2.0
+
 
 Author Information
 ------------------
