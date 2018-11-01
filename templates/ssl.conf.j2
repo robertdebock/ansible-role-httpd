@@ -1,10 +1,10 @@
 {{ ansible_managed | comment }}
-LoadModule ssl_module {{ httpd_mod_ssl[ansible_distribution] | default(httpd_mod_ssl['default']) }}
+LoadModule ssl_module {{ httpd_mod_ssl }}
 
 Listen {{ httpd_ssl_port }}
 <VirtualHost *:{{ httpd_ssl_port }}>
     ServerName {{ httpd_ssl_servername }}
     SSLEngine on
-    SSLCertificateFile "{{ httpd_config_directory[ansible_distribution] | default(httpd_config_directory['default']) }}/ssl/{{ httpd_ssl_servername }}.crt"
-    SSLCertificateKeyFile "{{ httpd_config_directory[ansible_distribution] | default(httpd_config_directory['default']) }}/ssl/{{ httpd_ssl_servername }}.key"
+    SSLCertificateFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
+    SSLCertificateKeyFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
 </VirtualHost>

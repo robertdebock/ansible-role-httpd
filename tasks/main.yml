@@ -2,8 +2,7 @@
 # tasks file for httpd
 - name: install apache httpd
   package:
-    name: "{{ httpd_packages[ansible_distribution]
-          | default(httpd_packages['default']) }}"
+    name: "{{ httpd_packages }}"
     state: "{{ httpd_package_state }}"
 
 - name: install requirements
@@ -24,28 +23,24 @@
 
 - name: create ssl directory
   file:
-    path: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/ssl"
+    path: "{{ httpd_config_directory }}/ssl"
     state: directory
 
 - name: create ssl key
   openssl_privatekey:
-    path: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/ssl/{{ httpd_ssl_servername }}.key"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
   register: key
 
 - name: create ssl csr
   openssl_csr:
-    path: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/ssl/{{ httpd_ssl_servername }}.csr"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.csr"
     privatekey_path: "{{ key.filename }}"
     common_name: "{{ httpd_ssl_servername }}"
   register: csr
 
 - name: create ssl certificates
   openssl_certificate:
-    path: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/ssl/{{ httpd_ssl_servername }}.crt"
+    path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
     privatekey_path: "{{ csr.privatekey }}"
     csr_path: "{{ csr.filename }}"
     provider: selfsigned
@@ -53,16 +48,14 @@
 - name: configure ssl
   template:
     src: ssl.conf.j2
-    dest: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/ssl.conf"
+    dest: "{{ httpd_config_directory }}/ssl.conf"
   notify:
     - restart httpd
 
 - name: configure locations
   template:
     src: location.conf.j2
-    dest: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/{{ item.name }}.conf"
+    dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
   with_items:
     - "{{ httpd_locations }}"
   notify:
@@ -75,8 +68,7 @@
 - name: configure vhosts
   template:
     src: vhost.conf.j2
-    dest: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/{{ item.name }}.conf"
+    dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
   with_items:
     - "{{ httpd_vhosts }}"
   notify:
@@ -89,15 +81,13 @@
 - name: configure redirect from http to https
   template:
     src: default_vhost.conf.j2
-    dest: "{{ httpd_config_directory[ansible_distribution]
-          | default(httpd_config_directory['default']) }}/default_vhost.conf"
+    dest: "{{ httpd_config_directory }}/default_vhost.conf"
   notify:
     - restart httpd
 
 - name: start and enable httpd
   service:
-    name: "{{ httpd_service[ansible_distribution]
-          | default(httpd_service['default']) }}"
+    name: "{{ httpd_service }}"
     state: started
     enabled: yes
   when:
