@@ -2,8 +2,7 @@
 # handlers file for httpd
 - name: restart httpd
   service:
-    name: "{{ httpd_service[ansible_distribution]
-          | default(httpd_service['default']) }}"
+    name: "{{ httpd_service }}"
     state: restarted
   when:
     - ansible_virtualization_type != "docker"
