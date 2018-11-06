@@ -30,8 +30,10 @@ httpd_packages: "{{ _httpd_packages[ansible_distribution] | default(_httpd_packa
 _httpd_service:
   default: httpd
   Alpine: apache2
+  Debian: apache2
   openSUSE Leap: apache2
   openSUSE Tumbleweed: apache2
+  Ubuntu: apache2
 
 httpd_service: "{{ _httpd_service[ansible_distribution] | default(_httpd_service['default']) }}"
 
