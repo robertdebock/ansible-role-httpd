@@ -3,8 +3,7 @@ httpd
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
 
-Provides Apache httpd for your system.
-
+The purpose of this role is to install and configure httpd on your system.
 
 Example Playbook
 ----------------
@@ -69,7 +68,6 @@ The following roles can be installed to ensure all requirements are met, using `
 - robertdebock.bootstrap
 - robertdebock.buildtools
 - robertdebock.epel
-- robertdebock.scl
 - robertdebock.python_pip
 
 

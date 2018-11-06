@@ -1,1 +1,0 @@
-Provides Apache httpd for your system.
