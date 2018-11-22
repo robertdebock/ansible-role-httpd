@@ -5,4 +5,4 @@
     name: "{{ httpd_service }}"
     state: restarted
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or httpd_ignore_docker
