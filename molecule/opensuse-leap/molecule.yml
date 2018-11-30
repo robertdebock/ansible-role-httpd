@@ -18,6 +18,9 @@ provisioner:
         httpd_ignore_docker: no
   lint:
     name: ansible-lint
+  config_options:
+    defaults:
+      callback_plugins: /usr/lib/python2.7/site-packages/ara/plugins/callbacks
 scenario:
   name: opensuse-leap
 verifier:
