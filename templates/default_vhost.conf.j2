@@ -3,5 +3,7 @@ NameVirtualHost *:{{ httpd_port }}
 <VirtualHost *:{{ httpd_port }}>
    ServerName {{ httpd_servername }}
    DocumentRoot "{{ httpd_data_directory }}"
-   Redirect permanent / https://{{ httpd_servername }}
+   RewriteEngine On
+   RewriteCond %{HTTPS} !=on
+   RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 </VirtualHost>
