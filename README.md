@@ -9,11 +9,12 @@ Example Playbook
 ----------------
 
 This example is taken from `molecule/default/playbook.yml`:
-```
+```yaml
 ---
 - name: Converge
   hosts: all
-  gather_facts: false
+  gather_facts: no
+  become: yes
 
   vars:
     httpd_applications:
@@ -23,9 +24,15 @@ This example is taken from `molecule/default/playbook.yml`:
       - name: myotherapp
         location: myotherapp
         backend_url: http://localhost:8080/myotherapp
+      - name: fedoraproxy
+        location: fedoraproxy
+        backend_url: http://dl.fedoraproject.org/pub/fedora/linux/
+        remote: http://localhost:3128/
 
   roles:
     - robertdebock.bootstrap
+    - robertdebock.epel
+    - robertdebock.buildtools
     - robertdebock.python_pip
     - robertdebock.httpd
 
@@ -35,7 +42,7 @@ Role Variables
 --------------
 
 These variables are set in `defaults/main.yml`:
-```
+```yaml
 ---
 # defaults file for httpd
 
@@ -69,12 +76,14 @@ Requirements
 
 The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
 
+```yaml
 ---
 - robertdebock.bootstrap
 - robertdebock.buildtools
 - robertdebock.epel
 - robertdebock.python_pip
 
+```
 
 Context
 -------

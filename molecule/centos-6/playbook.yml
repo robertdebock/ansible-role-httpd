@@ -12,8 +12,13 @@
       - name: myotherapp
         location: myotherapp
         backend_url: http://localhost:8080/myotherapp
+      - name: fedoraproxy
+        location: fedoraproxy
+        backend_url: http://dl.fedoraproject.org/pub/fedora/linux/
+        remote: http://localhost:3128/
 
   roles:
     - robertdebock.bootstrap
+    - robertdebock.epel
     - robertdebock.python_pip
     - ansible-role-httpd

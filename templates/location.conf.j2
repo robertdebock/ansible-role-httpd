@@ -2,4 +2,7 @@
 <Location {{ item.location }}>
   ProxyPass {{ item.backend_url }}
   ProxyPassReverse {{ item.backend_url }}
+{% if item.remote is defined %}
+  ProxyRemote * {{ item.remote }}
+{% endif %}
 </Location>
