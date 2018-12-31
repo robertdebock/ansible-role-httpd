@@ -1,5 +1,9 @@
 ---
 # handlers file for httpd
+- name: test httpd configuration validity
+  command: httpd -t
+  changed_when: no
+
 - name: restart httpd
   service:
     name: "{{ httpd_service }}"
