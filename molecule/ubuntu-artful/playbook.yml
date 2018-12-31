@@ -5,16 +5,22 @@
   become: yes
 
   vars:
-    httpd_applications:
-      - name: myapplication
-        location: /myapplication
+    httpd_locations:
+      - name: mylocation2
+        location: /mylocation1
         backend_url: http://localhost:8080/myapplication
-      - name: myotherapp
-        location: myotherapp
-        backend_url: http://localhost:8080/myotherapp
-      - name: fedoraproxy
-        location: fedoraproxy
-        backend_url: http://dl.fedoraproject.org/pub/fedora/linux/
+    httpd_vhosts:
+      - name: myvhost1
+        servername: www1.example.com
+        documentroot: /var/www/html/www1.example.com
+      - name: myvhost2
+        servername: www2.example.com
+        documentroot: /var/www/html/www2.example.com
+        backend_url: http://www.example.com/
+      - name: myvhost3
+        servername: www3.example.com
+        documentroot: /var/www/html/www3.example.com
+        backend_url: http://www.example.com/
         remote: http://localhost:3128/
 
   roles:

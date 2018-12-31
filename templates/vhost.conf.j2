@@ -4,7 +4,7 @@
 {% if item.documentroot is defined %}
    DocumentRoot "{{ item.documtentroot }}"
 {% endif %}
-{% if item.backend_url is defined }}
+{% if item.backend_url is defined %}
    ProxyPreserveHost On
    ProxyPass / {{ item.backend_url }}
    ProxyPassReverse / {{ item.backend_url }}

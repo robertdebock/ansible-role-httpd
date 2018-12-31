@@ -17,16 +17,22 @@ This example is taken from `molecule/default/playbook.yml`:
   become: yes
 
   vars:
-    httpd_applications:
-      - name: myapplication
-        location: /myapplication
+    httpd_locations:
+      - name: mylocation1
+        location: /mylocation1
         backend_url: http://localhost:8080/myapplication
-      - name: myotherapp
-        location: myotherapp
-        backend_url: http://localhost:8080/myotherapp
-      - name: fedoraproxy
-        location: fedoraproxy
-        backend_url: http://dl.fedoraproject.org/pub/fedora/linux/
+    httpd_vhosts:
+      - name: myvhost1
+        servername: www1.example.com
+        documentroot: /var/www/html/www1.example.com
+      - name: myvhost2
+        servername: www2.example.com
+        documentroot: /var/www/html/www2.example.com
+        backend_url: http://www.example.com/
+      - name: myvhost3
+        servername: www3.example.com
+        documentroot: /var/www/html/www3.example.com
+        backend_url: http://www.example.com/
         remote: http://localhost:3128/
 
   roles:
@@ -137,9 +143,13 @@ To test on Amazon EC2, configure [~/.aws/credentials](https://docs.aws.amazon.co
 There are many specific scenarios available, please have a look in the `molecule/` directory.
 
 Run the [ansible-galaxy](https://github.com/ansible/galaxy-lint-rules) and [my](https://github.com/robertdebock/ansible-lint-rules) lint rules if you want your change to be merges:
-```
-ansible-lint -r /path/to/galaxy-lint-rules/rules .
-ansible-lint -r /path/to/ansible-lint-rules/rules .
+
+```shell
+git clone https://github.com/ansible/ansible-lint.git /tmp/ansible-lint
+ansible-lint -r /tmp/ansible-lint/lib/ansiblelint/rules .
+
+git clone https://github.com/robertdebock/ansible-lint /tmp/my-ansible-lint
+ansible-lint -r /tmp/my-ansible-lint/rules .
 ```
 
 License
