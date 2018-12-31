@@ -63,3 +63,10 @@ _httpd_modules_path:
   Ubuntu: /usr/lib/apache2/modules
 
 httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
+
+_httpd_binary:
+  default: httpd
+  Debian: apache2
+  Ubuntu: apache2
+
+httpd_binary: "{{ _httpd_binary[ansible_distribution] | default(_httpd_binary['default']) }}"

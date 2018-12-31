@@ -1,7 +1,7 @@
 ---
 # handlers file for httpd
 - name: test httpd configuration validity
-  command: httpd -t
+  command: "{{ httpd_binary }} -t"
   changed_when: no
 
 - name: restart httpd
