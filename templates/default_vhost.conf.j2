@@ -1,4 +1,7 @@
 {{ ansible_managed | comment }}
+
+LoadModule rewrite_module modules/mod_rewrite.so
+
 <VirtualHost *:{{ httpd_port }}>
    ServerName {{ httpd_servername }}
    DocumentRoot "{{ httpd_data_directory }}"
