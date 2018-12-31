@@ -57,9 +57,9 @@ _httpd_data_directory:
 
 httpd_data_directory: "{{ _httpd_data_directory[ansible_distribution] | default(_httpd_data_directory['default']) }}"
 
-_httpd_mod_ssl:
-  default: modules/mod_ssl.so
-  Debian: /usr/lib/apache2/modules/mod_ssl.so
-  Ubuntu: /usr/lib/apache2/modules/mod_ssl.so
+_httpd_modules_path:
+  default: modules
+  Debian: /usr/lib/apache2/modules
+  Ubuntu: /usr/lib/apache2/modules
 
-httpd_mod_ssl: "{{ _httpd_mod_ssl[ansible_distribution] | default(_httpd_mod_ssl['default']) }}"
+httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
