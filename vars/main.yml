@@ -14,6 +14,7 @@ _httpd_packages:
   Alpine:
     - apache2
     - apache2-ssl
+    - apache2-proxy
   Archlinux:
     - apache
   Debian:
@@ -61,6 +62,8 @@ _httpd_modules_path:
   default: modules
   Debian: /usr/lib/apache2/modules
   Ubuntu: /usr/lib/apache2/modules
+  openSUSE Leap: /usr/lib64/apache2-prefork
+  openSUSE Tumbleweed: /usr/lib64/apache2-prefork
 
 httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
 
