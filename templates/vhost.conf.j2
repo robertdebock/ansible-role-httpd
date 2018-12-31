@@ -1,4 +1,9 @@
 {{ ansible_managed | comment }}
+
+{% if item.backend_url is defined %}
+LoadModule proxy_http_module modules/mod_proxy_http.so
+{% endif %}
+
 <VirtualHost *:{{ httpd_port }}>
    ServerName {{ item.servername }}
 {% if item.documentroot is defined %}
