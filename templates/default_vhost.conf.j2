@@ -1,5 +1,4 @@
 {{ ansible_managed | comment }}
-NameVirtualHost *:{{ httpd_port }}
 <VirtualHost *:{{ httpd_port }}>
    ServerName {{ httpd_servername }}
    DocumentRoot "{{ httpd_data_directory }}"
