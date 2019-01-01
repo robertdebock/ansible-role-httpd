@@ -69,7 +69,7 @@ httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_htt
 
 _httpd_binary:
   default: httpd
-  Debian: apache2
-  Ubuntu: apache2
+  Debian: apachectl
+  Ubuntu: apachectl
 
 httpd_binary: "{{ _httpd_binary[ansible_distribution] | default(_httpd_binary['default']) }}"
