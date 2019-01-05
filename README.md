@@ -3,7 +3,7 @@ httpd
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-httpd.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-httpd)
 
-The purpose of this role is to install and configure httpd on your system.
+Install and configure httpd on your system.
 
 Example Playbook
 ----------------
