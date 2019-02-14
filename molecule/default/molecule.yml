@@ -34,8 +34,10 @@ platforms:
     image: opensuse:leap
   - name: httpd-opensuse-tumbleweed
     image: opensuse:tumbleweed
-  - name: httpd-ubuntu-artful
-    image: ubuntu:artful
+  - name: httpd-ubuntu-latest
+    image: ubuntu:latest
+  - name: httpd-ubuntu-rolling
+    image: ubuntu:rolling
   - name: httpd-ubuntu-devel
     image: ubuntu:devel
   - name: httpd-ubuntu-latest

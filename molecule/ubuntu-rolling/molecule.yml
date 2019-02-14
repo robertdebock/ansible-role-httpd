@@ -8,8 +8,8 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: httpd-ubuntu-artful
-    image: ubuntu:artful
+  - name: httpd-ubuntu-rolling
+    image: ubuntu:rolling
 provisioner:
   name: ansible
   inventory:
@@ -22,7 +22,7 @@ provisioner:
     defaults:
       callback_plugins: /usr/lib/python2.7/site-packages/ara/plugins/callbacks
 scenario:
-  name: ubuntu-artful
+  name: ubuntu-rolling
 verifier:
   name: goss
   lint:
