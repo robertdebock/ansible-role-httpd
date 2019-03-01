@@ -32,8 +32,6 @@ platforms:
     image: fedora:rawhide
   - name: httpd-opensuse-leap
     image: opensuse:leap
-  - name: httpd-opensuse-tumbleweed
-    image: opensuse:tumbleweed
   - name: httpd-ubuntu-latest
     image: ubuntu:latest
   - name: httpd-ubuntu-rolling
