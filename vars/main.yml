@@ -21,8 +21,6 @@ _httpd_packages:
     - apache2
   openSUSE Leap:
     - httpd
-  openSUSE Tumbleweed:
-    - httpd
   Ubuntu:
     - apache2
 
@@ -33,7 +31,6 @@ _httpd_service:
   Alpine: apache2
   Debian: apache2
   openSUSE Leap: apache2
-  openSUSE Tumbleweed: apache2
   Ubuntu: apache2
 
 httpd_service: "{{ _httpd_service[ansible_distribution] | default(_httpd_service['default']) }}"
@@ -44,7 +41,6 @@ _httpd_config_directory:
   Archlinux: /etc/httpd/conf/extra
   Debian: /etc/apache2/conf-enabled
   openSUSE Leap: /etc/apache2/conf.d
-  openSUSE Tumbleweed: /etc/apache2/conf.d
   Ubuntu: /etc/apache2/conf-enabled
 
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
@@ -54,7 +50,6 @@ _httpd_data_directory:
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
   Archlinux: /src/http
   openSUSE Leap: /src/www/htdocs
-  openSUSE Tumbleweed: /src/www/htdocs
 
 httpd_data_directory: "{{ _httpd_data_directory[ansible_distribution] | default(_httpd_data_directory['default']) }}"
 
@@ -63,7 +58,6 @@ _httpd_modules_path:
   Debian: /usr/lib/apache2/modules
   Ubuntu: /usr/lib/apache2/modules
   openSUSE Leap: /usr/lib64/apache2-prefork
-  openSUSE Tumbleweed: /usr/lib64/apache2-prefork
 
 httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
 
