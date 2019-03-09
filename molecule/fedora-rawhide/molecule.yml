@@ -28,7 +28,3 @@ provisioner:
       callback_plugins: /usr/lib/python2.7/site-packages/ara/plugins/callbacks
 scenario:
   name: fedora-rawhide
-verifier:
-  name: goss
-  lint:
-    name: yamllint

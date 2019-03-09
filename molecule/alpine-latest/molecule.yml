@@ -24,7 +24,3 @@ provisioner:
       callback_plugins: /usr/lib/python2.7/site-packages/ara/plugins/callbacks
 scenario:
   name: alpine-latest
-verifier:
-  name: goss
-  lint:
-    name: yamllint
