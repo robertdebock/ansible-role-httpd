@@ -3,10 +3,10 @@ dependency:
   name: galaxy
   options:
     role-file: requirements.yml
-driver:
-  name: docker
 lint:
   name: yamllint
+driver:
+  name: docker
 platforms:
   - name: httpd-fedora-rawhide
     image: fedora:rawhide
@@ -14,17 +14,7 @@ platforms:
       url: registry.fedoraproject.org
 provisioner:
   name: ansible
-  inventory:
-    host_vars:
-      httpd-fedora-rawhide:
-        ansible_python_interpreter: /usr/bin/python3
-    group_vars:
-      all:
-        httpd_ignore_docker: no
   lint:
     name: ansible-lint
-  config_options:
-    defaults:
-      callback_plugins: /usr/lib/python2.7/site-packages/ara/plugins/callbacks
 scenario:
   name: fedora-rawhide
