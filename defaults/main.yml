@@ -12,6 +12,3 @@ httpd_ssl_servername: "{{ ansible_fqdn }}"
 
 # For SSL a TCP port is required.
 httpd_ssl_port: 443
-
-# To update all packages installed by this roles, set `httpd_package_state` to `latest`.
-httpd_package_state: present

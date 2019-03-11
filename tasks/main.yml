@@ -3,7 +3,7 @@
 - name: install apache httpd
   package:
     name: "{{ httpd_packages }}"
-    state: "{{ httpd_package_state }}"
+    state: present
   register: httpd_install_apache_httpd
   until: httpd_install_apache_httpd is succeeded
   retries: 3
