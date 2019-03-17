@@ -16,18 +16,6 @@ This example is taken from `molecule/default/playbook.yml`:
   become: yes
   gather_facts: yes
 
-  roles:
-    - robertdebock.httpd
-```
-
-The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
-```yaml
----
-- name: Prepare
-  hosts: all
-  gather_facts: no
-  become: yes
-
   vars:
     httpd_locations:
       - name: mylocation1
@@ -46,6 +34,18 @@ The machine you are running this on, may need to be prepared. Tests have been do
         documentroot: /var/www/html/www3.example.com
         backend_url: http://www.example.com/
         remote: http://localhost:3128/
+
+  roles:
+    - robertdebock.httpd
+```
+
+The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
+```yaml
+---
+- name: Prepare
+  hosts: all
+  gather_facts: no
+  become: yes
 
   roles:
     - robertdebock.bootstrap
