@@ -10,18 +10,18 @@
         location: /mylocation1
         backend_url: http://localhost:8080/myapplication
     httpd_vhosts:
-      - name: myvhost1
+      - name: docroot
         servername: www1.example.com
         documentroot: /var/www/html/www1.example.com
-      - name: myvhost2
+      - name: backend_http
         servername: www2.example.com
-        documentroot: /var/www/html/www2.example.com
         backend_url: http://www.example.com/
-      - name: myvhost3
+      - name: remote
         servername: www3.example.com
-        documentroot: /var/www/html/www3.example.com
-        backend_url: http://www.example.com/
         remote: http://localhost:3128/
+      - name: backend_https
+        servername: www4.example.com
+        backend_url: https://www.example.com/
 
   roles:
     - ansible-role-httpd

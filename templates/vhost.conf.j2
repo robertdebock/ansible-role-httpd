@@ -11,6 +11,9 @@ LoadModule proxy_http_module {{ httpd_modules_path }}/mod_proxy_http.so
    DocumentRoot "{{ item.documentroot }}"
 {% endif %}
 {% if item.backend_url is defined %}
+{% if "https" in item.backend_url %}
+    SSLProxyEngine on
+{% endif %}
    ProxyPreserveHost On
    ProxyPass / {{ item.backend_url }}
    ProxyPassReverse / {{ item.backend_url }}
