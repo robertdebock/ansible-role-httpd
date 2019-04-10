@@ -95,15 +95,6 @@
     - test httpd configuration validity
     - restart httpd
 
-- name: Configure httpd.conf
-  blockinfile:
-    path: /etc/httpd/conf/httpd.conf
-    marker: "<IfModule mime_module>"
-    content: "    AddType application/x-x509-ca-cert .der .crt"
-  notify:
-    - test httpd configuration validity
-    - restart httpd
-
 - name: start and enable httpd
   service:
     name: "{{ httpd_service }}"

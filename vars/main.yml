@@ -45,15 +45,6 @@ _httpd_config_directory:
 
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
 
-_httpd_conf:
-  default: /etc/httpd/conf/httpd.conf
-  Alpine: /etc/apache2/apache2.conf
-  Debian: /etc/apache2/apache2.conf
-  Ubuntu: /etc/apache2/apache2.conf
-  openSUSE Leap: /etc/apache2/apache2.conf
-
-httpd_conf: "{{ _httpd_conf[ansible_distribution] | default(_httpd_conf['default']) }}"
-
 _httpd_data_directory:
   default: /var/www/html
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
