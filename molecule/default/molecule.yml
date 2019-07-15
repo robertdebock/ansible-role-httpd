@@ -25,9 +25,6 @@ platforms:
   - name: httpd-centos-latest
     image: centos:latest
     pre_build_image: yes
-  - name: httpd-debian-latest
-    image: debian:latest
-    pre_build_image: yes
   - name: httpd-debian-stable
     image: debian:stable
     pre_build_image: yes
