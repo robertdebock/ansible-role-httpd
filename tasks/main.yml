@@ -87,6 +87,16 @@
   loop_control:
     label: "{{ item.name }}"
 
+- name: configure ports
+  template:
+    src: ports.conf.j2
+    dest: "/etc/apache2/ports.conf"
+  notify:
+    - test httpd configuration validity
+    - restart httpd
+  when:
+    - ansible_os_family == "Debian"
+
 - name: configure redirect from http to https
   template:
     src: default_vhost.conf.j2
