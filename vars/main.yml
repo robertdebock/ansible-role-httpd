@@ -45,6 +45,18 @@ _httpd_config_directory:
 
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
 
+_httpd_config_src:
+  Debian: ports.conf.j2
+  RedHat: httpd.conf.j2
+
+httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
+
+_httpd_config_dest:
+  Debian: /etc/apache2/ports.conf
+  RedHat: /etc/httpd/conf/httpd.conf
+
+httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
+
 _httpd_data_directory:
   default: /var/www/html
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}

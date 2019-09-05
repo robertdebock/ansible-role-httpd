@@ -27,6 +27,19 @@
   with_items:
     - "{{ httpd_sebooleans }}"
 
+- name: allow connections to custom port
+  seport:
+    ports: "{{ item }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_selinux.status is defined
+    - ansible_selinux.status == "enabled"
+  with_items:
+    - "{{ httpd_port }}"
+    - "{{ httpd_ssl_port }}"
+
 - name: create ssl directory
   file:
     path: "{{ httpd_config_directory }}/ssl"
@@ -87,15 +100,13 @@
   loop_control:
     label: "{{ item.name }}"
 
-- name: configure ports
+- name: configure httpd
   template:
-    src: ports.conf.j2
-    dest: "/etc/apache2/ports.conf"
+    src: "{{ httpd_config_src }}"
+    dest: "{{ httpd_config_dest }}"
   notify:
     - test httpd configuration validity
     - restart httpd
-  when:
-    - ansible_os_family == "Debian"
 
 - name: configure redirect from http to https
   template:
