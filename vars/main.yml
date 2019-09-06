@@ -46,14 +46,20 @@ _httpd_config_directory:
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
 
 _httpd_config_src:
+  Alpine: httpd.conf.j2
+  Archlinux: httpd.conf.j2
   Debian: ports.conf.j2
   RedHat: httpd.conf.j2
+  Suse: httpd.conf.j2
 
 httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
 
 _httpd_config_dest:
+  Alpine: /etc/apache2/httpd.conf
+  Archlinux: /etc/httpd/conf/httpd.conf
   Debian: /etc/apache2/ports.conf
   RedHat: /etc/httpd/conf/httpd.conf
+  Suse: /etc/apache2/httpd.conf
 
 httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
 
