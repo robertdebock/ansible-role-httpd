@@ -35,13 +35,23 @@ _httpd_service:
 
 httpd_service: "{{ _httpd_service[ansible_distribution] | default(_httpd_service['default']) }}"
 
+_httpd_server_root:
+  default: /etc/httpd
+  Alpine: /etc/apache2
+  Archlinux: /etc/httpd
+  Debian: /etc/apache2
+  openSUSE Leap: /etc/apache2
+  Ubuntu: /etc/apache2
+
+httpd_server_root: "{{ _httpd_server_root[ansible_distribution] | default(_httpd_server_root['default']) }}"
+
 _httpd_config_directory:
-  default: /etc/httpd/conf.d
-  Alpine: /etc/apache2/conf.d
-  Archlinux: /etc/httpd/conf/extra
-  Debian: /etc/apache2/conf-enabled
-  openSUSE Leap: /etc/apache2/conf.d
-  Ubuntu: /etc/apache2/conf-enabled
+  default: "{{ httpd_server_root }}/conf.d"
+  Alpine: "{{ httpd_server_root }}/conf.d"
+  Archlinux: "{{ httpd_server_root }}/conf/extra"
+  Debian: "{{ httpd_server_root }}/conf-enabled"
+  openSUSE Leap: "{{ httpd_server_root }}/conf.d"
+  Ubuntu: "{{ httpd_server_root }}/conf-enabled"
 
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
 
@@ -55,11 +65,11 @@ _httpd_config_src:
 httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
 
 _httpd_config_dest:
-  Alpine: /etc/apache2/httpd.conf
-  Archlinux: /etc/httpd/conf/httpd.conf
-  Debian: /etc/apache2/ports.conf
-  RedHat: /etc/httpd/conf/httpd.conf
-  Suse: /etc/apache2/httpd.conf
+  Alpine: "{{ httpd_server_root }}/httpd.conf"
+  Archlinux: "{{ httpd_server_root }}/conf/httpd.conf"
+  Debian: "{{ httpd_server_root }}/ports.conf"
+  RedHat: "{{ httpd_server_root }}/conf/httpd.conf"
+  Suse: "{{ httpd_server_root }}/httpd.conf"
 
 httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
 

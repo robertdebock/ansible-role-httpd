@@ -31,7 +31,7 @@
 # same ServerRoot for multiple httpd daemons, you will need to change at
 # least PidFile.
 #
-ServerRoot "/etc/httpd"
+ServerRoot "{{ httpd_server_root }}"
 
 #
 # Listen: Allows you to bind Apache to specific IP addresses and/or
@@ -56,7 +56,7 @@ Listen {{ httpd_port }}
 # Example:
 # LoadModule foo_module modules/mod_foo.so
 #
-Include conf.modules.d/*.conf
+Include {{ httpd_config_directory}}/*.conf
 
 #
 # If you wish httpd to run as a different user or group, you must run
@@ -350,7 +350,4 @@ AddDefaultCharset UTF-8
 #EnableMMAP off
 EnableSendfile on
 
-# Supplemental configuration
-#
-# Load config files in the "/etc/httpd/conf.d" directory, if any.
-IncludeOptional conf.d/*.conf
+LoadModule mpm_event_module modules/mod_mpm_event.so
