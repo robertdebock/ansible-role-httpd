@@ -116,6 +116,27 @@
     - test httpd configuration validity
     - restart httpd
 
+- name: remove specific configurations.
+  file:
+    path: "{{ httpd_config_directory }}/{{ item }}"
+    state: absent
+  with_items:
+    - autoindex.conf
+    - userdir.conf
+    - welcome.conf
+  notify:
+    - test httpd configuration validity
+    - restart httpd
+
+- name: create docroot
+  file:
+    path: "{{ item.documentroot }}"
+    state: directory
+  with_items:
+    - "{{ httpd_vhosts }}"
+  when:
+    - item.documentroot is defined
+
 - name: start and enable httpd
   service:
     name: "{{ httpd_service }}"
