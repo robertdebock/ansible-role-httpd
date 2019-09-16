@@ -92,13 +92,13 @@ _httpd_data_directory:
 
 httpd_data_directory: "{{ _httpd_data_directory[ansible_distribution] | default(_httpd_data_directory['default']) }}"
 
-# _httpd_modules_path:
-#   default: modules
-#   Debian: /usr/lib/apache2/modules
-#   Ubuntu: /usr/lib/apache2/modules
-#   openSUSE Leap: /usr/lib64/apache2-prefork
+_httpd_modules_path:
+  default: modules
+  Debian: /usr/lib/apache2/modules
+  Ubuntu: /usr/lib/apache2/modules
+  openSUSE Leap: /usr/lib64/apache2-prefork
 
-# httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
+httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
 
 # This variable is used in handlers to test the configuration.
 _httpd_binary:
