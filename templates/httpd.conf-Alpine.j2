@@ -1,3 +1,5 @@
+{{ ansible_managed | comment }}
+
 #
 # This is the main Apache HTTP server configuration file.  It contains the
 # configuration directives that give the server its instructions.
@@ -6,9 +8,6 @@
 # <URL:http://httpd.apache.org/docs/2.4/mod/directives.html>
 # for a discussion of each configuration directive.
 #
-# See the httpd.conf(5) man page for more information on this configuration,
-# and httpd.service(8) on using and configuring the httpd service.
-#
 # Do NOT simply read the instructions in here without understanding
 # what they do.  They're here only as hints or reminders.  If you are unsure
 # consult the online docs. You have been warned.  
@@ -16,10 +15,20 @@
 # Configuration and logfile names: If the filenames you specify for many
 # of the server's control files begin with "/" (or "drive:/" for Win32), the
 # server will use that explicit path.  If the filenames do *not* begin
-# with "/", the value of ServerRoot is prepended -- so 'log/access_log'
-# with ServerRoot set to '/www' will be interpreted by the
-# server as '/www/log/access_log', where as '/log/access_log' will be
-# interpreted as '/log/access_log'.
+# with "/", the value of ServerRoot is prepended -- so "logs/access_log"
+# with ServerRoot set to "/usr/local/apache2" will be interpreted by the
+# server as "/usr/local/apache2/logs/access_log", whereas "/logs/access_log" 
+# will be interpreted as '/logs/access_log'.
+
+#
+# ServerTokens
+# This directive configures what you return as the Server HTTP response
+# Header. The default is 'Full' which sends information about the OS-Type
+# and compiled in modules.
+# Set to one of:  Full | OS | Minor | Minimal | Major | Prod
+# where Full conveys the most information, and Prod the least.
+#
+ServerTokens OS
 
 #
 # ServerRoot: The top of the directory tree under which the server's
@@ -31,7 +40,17 @@
 # same ServerRoot for multiple httpd daemons, you will need to change at
 # least PidFile.
 #
-ServerRoot "{{ httpd_server_root }}"
+ServerRoot /var/www
+
+#
+# Mutex: Allows you to set the mutex mechanism and mutex file directory
+# for individual mutexes, or change the global defaults
+#
+# Uncomment and change the directory if mutexes are file-based and the default
+# mutex file directory is not on a local disk or is not appropriate for some
+# other reason.
+#
+# Mutex default:/run/apache2
 
 #
 # Listen: Allows you to bind Apache to specific IP addresses and/or
@@ -56,8 +75,101 @@ Listen {{ httpd_port }}
 # Example:
 # LoadModule foo_module modules/mod_foo.so
 #
-Include {{ httpd_config_directory}}/*.conf
+#LoadModule mpm_event_module modules/mod_mpm_event.so
+LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+#LoadModule mpm_worker_module modules/mod_mpm_worker.so
+LoadModule authn_file_module modules/mod_authn_file.so
+#LoadModule authn_dbm_module modules/mod_authn_dbm.so
+#LoadModule authn_anon_module modules/mod_authn_anon.so
+#LoadModule authn_dbd_module modules/mod_authn_dbd.so
+#LoadModule authn_socache_module modules/mod_authn_socache.so
+LoadModule authn_core_module modules/mod_authn_core.so
+LoadModule authz_host_module modules/mod_authz_host.so
+LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+LoadModule authz_user_module modules/mod_authz_user.so
+#LoadModule authz_dbm_module modules/mod_authz_dbm.so
+#LoadModule authz_owner_module modules/mod_authz_owner.so
+#LoadModule authz_dbd_module modules/mod_authz_dbd.so
+LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule access_compat_module modules/mod_access_compat.so
+LoadModule auth_basic_module modules/mod_auth_basic.so
+#LoadModule auth_form_module modules/mod_auth_form.so
+#LoadModule auth_digest_module modules/mod_auth_digest.so
+#LoadModule allowmethods_module modules/mod_allowmethods.so
+#LoadModule file_cache_module modules/mod_file_cache.so
+#LoadModule cache_module modules/mod_cache.so
+#LoadModule cache_disk_module modules/mod_cache_disk.so
+#LoadModule cache_socache_module modules/mod_cache_socache.so
+#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+#LoadModule socache_dbm_module modules/mod_socache_dbm.so
+#LoadModule socache_memcache_module modules/mod_socache_memcache.so
+#LoadModule socache_redis_module modules/mod_socache_redis.so
+#LoadModule watchdog_module modules/mod_watchdog.so
+#LoadModule macro_module modules/mod_macro.so
+#LoadModule dbd_module modules/mod_dbd.so
+#LoadModule dumpio_module modules/mod_dumpio.so
+#LoadModule echo_module modules/mod_echo.so
+#LoadModule buffer_module modules/mod_buffer.so
+#LoadModule data_module modules/mod_data.so
+#LoadModule ratelimit_module modules/mod_ratelimit.so
+LoadModule reqtimeout_module modules/mod_reqtimeout.so
+#LoadModule ext_filter_module modules/mod_ext_filter.so
+#LoadModule request_module modules/mod_request.so
+#LoadModule include_module modules/mod_include.so
+LoadModule filter_module modules/mod_filter.so
+#LoadModule reflector_module modules/mod_reflector.so
+#LoadModule substitute_module modules/mod_substitute.so
+#LoadModule sed_module modules/mod_sed.so
+#LoadModule charset_lite_module modules/mod_charset_lite.so
+#LoadModule deflate_module modules/mod_deflate.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule log_config_module modules/mod_log_config.so
+#LoadModule log_debug_module modules/mod_log_debug.so
+#LoadModule log_forensic_module modules/mod_log_forensic.so
+#LoadModule logio_module modules/mod_logio.so
+LoadModule env_module modules/mod_env.so
+#LoadModule mime_magic_module modules/mod_mime_magic.so
+#LoadModule expires_module modules/mod_expires.so
+LoadModule headers_module modules/mod_headers.so
+#LoadModule usertrack_module modules/mod_usertrack.so
+#LoadModule unique_id_module modules/mod_unique_id.so
+LoadModule setenvif_module modules/mod_setenvif.so
+LoadModule version_module modules/mod_version.so
+#LoadModule remoteip_module modules/mod_remoteip.so
+#LoadModule session_module modules/mod_session.so
+#LoadModule session_cookie_module modules/mod_session_cookie.so
+#LoadModule session_crypto_module modules/mod_session_crypto.so
+#LoadModule session_dbd_module modules/mod_session_dbd.so
+#LoadModule slotmem_shm_module modules/mod_slotmem_shm.so
+#LoadModule slotmem_plain_module modules/mod_slotmem_plain.so
+#LoadModule dialup_module modules/mod_dialup.so
+#LoadModule http2_module modules/mod_http2.so
+LoadModule unixd_module modules/mod_unixd.so
+#LoadModule heartbeat_module modules/mod_heartbeat.so
+#LoadModule heartmonitor_module modules/mod_heartmonitor.so
+LoadModule status_module modules/mod_status.so
+LoadModule autoindex_module modules/mod_autoindex.so
+#LoadModule asis_module modules/mod_asis.so
+#LoadModule info_module modules/mod_info.so
+#LoadModule suexec_module modules/mod_suexec.so
+<IfModule !mpm_prefork_module>
+	#LoadModule cgid_module modules/mod_cgid.so
+</IfModule>
+<IfModule mpm_prefork_module>
+	#LoadModule cgi_module modules/mod_cgi.so
+</IfModule>
+#LoadModule vhost_alias_module modules/mod_vhost_alias.so
+#LoadModule negotiation_module modules/mod_negotiation.so
+LoadModule dir_module modules/mod_dir.so
+#LoadModule actions_module modules/mod_actions.so
+#LoadModule speling_module modules/mod_speling.so
+#LoadModule userdir_module modules/mod_userdir.so
+LoadModule alias_module modules/mod_alias.so
+#LoadModule rewrite_module modules/mod_rewrite.so
 
+LoadModule negotiation_module modules/mod_negotiation.so
+
+<IfModule unixd_module>
 #
 # If you wish httpd to run as a different user or group, you must run
 # httpd as root initially and it will switch.  
@@ -68,6 +180,8 @@ Include {{ httpd_config_directory}}/*.conf
 #
 User apache
 Group apache
+
+</IfModule>
 
 # 'Main' server configuration
 #
@@ -86,7 +200,17 @@ Group apache
 # e-mailed.  This address appears on some server-generated pages, such
 # as error documents.  e.g. admin@your-domain.com
 #
-ServerAdmin root@localhost
+ServerAdmin you@example.com
+
+#
+# Optionally add a line containing the server version and virtual host
+# name to server-generated pages (internal error documents, FTP directory
+# listings, mod_status and mod_info output etc., but not CGI generated
+# documents or custom error documents).
+# Set to "EMail" to also include a mailto: link to the ServerAdmin.
+# Set to one of:  On | Off | EMail
+#
+ServerSignature On
 
 #
 # ServerName gives the name and port that the server uses to identify itself.
@@ -119,19 +243,8 @@ ServerAdmin root@localhost
 # documents. By default, all requests are taken from this directory, but
 # symbolic links and aliases may be used to point to other locations.
 #
-DocumentRoot "/var/www/html"
-
-#
-# Relax access to content within /var/www.
-#
-<Directory "/var/www">
-    AllowOverride None
-    # Allow open access:
-    Require all granted
-</Directory>
-
-# Further relax access to the default document root:
-<Directory "/var/www/html">
+DocumentRoot "/var/www/localhost/htdocs"
+<Directory "/var/www/localhost/htdocs">
     #
     # Possible values for the Options directive are "None", "All",
     # or any combination of:
@@ -149,7 +262,7 @@ DocumentRoot "/var/www/html"
     #
     # AllowOverride controls what directives may be placed in .htaccess files.
     # It can be "All", "None", or any combination of the keywords:
-    #   Options FileInfo AuthConfig Limit
+    #   AllowOverride FileInfo AuthConfig Limit
     #
     AllowOverride None
 
@@ -182,7 +295,7 @@ DocumentRoot "/var/www/html"
 # logged here.  If you *do* define an error logfile for a <VirtualHost>
 # container, that host's errors will be logged there and not here.
 #
-ErrorLog "logs/error_log"
+ErrorLog logs/error.log
 
 #
 # LogLevel: Control the number of messages logged to the error_log.
@@ -211,13 +324,13 @@ LogLevel warn
     # define per-<VirtualHost> access logfiles, transactions will be
     # logged therein and *not* in this file.
     #
-    #CustomLog "logs/access_log" common
+    #CustomLog logs/access.log common
 
     #
     # If you prefer a logfile with access, agent, and referer information
     # (Combined Logfile Format) you can use the following directive.
     #
-    CustomLog "logs/access_log" combined
+    CustomLog logs/access.log combined
 </IfModule>
 
 <IfModule alias_module>
@@ -247,26 +360,43 @@ LogLevel warn
     # client.  The same rules about trailing "/" apply to ScriptAlias
     # directives as to Alias.
     #
-    ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
+    ScriptAlias /cgi-bin/ "/var/www/localhost/cgi-bin/"
 
 </IfModule>
 
+<IfModule cgid_module>
+    #
+    # ScriptSock: On threaded servers, designate the path to the UNIX
+    # socket used to communicate with the CGI daemon of mod_cgid.
+    #
+    #Scriptsock cgisock
+</IfModule>
+
 #
-# "/var/www/cgi-bin" should be changed to whatever your ScriptAliased
+# "/var/www/localhost/cgi-bin" should be changed to whatever your ScriptAliased
 # CGI directory exists, if you have that configured.
 #
-<Directory "/var/www/cgi-bin">
+<Directory "/var/www/localhost/cgi-bin">
     AllowOverride None
     Options None
     Require all granted
 </Directory>
+
+<IfModule headers_module>
+    #
+    # Avoid passing HTTP_PROXY environment to CGI's on this or any proxied
+    # backend servers which have lingering "httpoxy" defects.
+    # 'Proxy' request header is undefined by the IETF, not listed by IANA
+    #
+    RequestHeader unset Proxy early
+</IfModule>
 
 <IfModule mime_module>
     #
     # TypesConfig points to the file containing the list of mappings from
     # filename extension to MIME-type.
     #
-    TypesConfig /etc/mime.types
+    TypesConfig /etc/apache2/mime.types
 
     #
     # AddType allows you to add to or override the MIME configuration
@@ -305,26 +435,17 @@ LogLevel warn
     # To parse .shtml files for server-side includes (SSI):
     # (You will also need to add "Includes" to the "Options" directive.)
     #
-    AddType text/html .shtml
-    AddOutputFilter INCLUDES .shtml
+    #AddType text/html .shtml
+    #AddOutputFilter INCLUDES .shtml
 </IfModule>
 
 #
-# Specify a default charset for all content served; this enables
-# interpretation of all content as UTF-8 by default.  To use the 
-# default browser choice (ISO-8859-1), or to allow the META tags
-# in HTML content to override this choice, comment out this
-# directive:
+# The mod_mime_magic module allows the server to use various hints from the
+# contents of the file itself to determine its type.  The MIMEMagicFile
+# directive tells the module where the hint definitions are located.
 #
-AddDefaultCharset UTF-8
-
 <IfModule mime_magic_module>
-    #
-    # The mod_mime_magic module allows the server to use various hints from the
-    # contents of the file itself to determine its type.  The MIMEMagicFile
-    # directive tells the module where the hint definitions are located.
-    #
-    MIMEMagicFile conf/magic
+    MIMEMagicFile /etc/apache2/magic
 </IfModule>
 
 #
@@ -339,15 +460,24 @@ AddDefaultCharset UTF-8
 #
 
 #
+# MaxRanges: Maximum number of Ranges in a request before
+# returning the entire resource, or one of the special
+# values 'default', 'none' or 'unlimited'.
+# Default setting is to accept 200 Ranges.
+#MaxRanges unlimited
+
+#
 # EnableMMAP and EnableSendfile: On systems that support it, 
 # memory-mapping or the sendfile syscall may be used to deliver
 # files.  This usually improves server performance, but must
 # be turned off when serving from networked-mounted 
 # filesystems or if support for these functions is otherwise
 # broken on your system.
-# Defaults if commented: EnableMMAP On, EnableSendfile Off
+# Defaults: EnableMMAP On, EnableSendfile Off
 #
 #EnableMMAP off
-EnableSendfile on
+#EnableSendfile on
 
-LoadModule mpm_event_module modules/mod_mpm_event.so
+# Load config files from the config directory "/etc/apache2/conf.d".
+#
+IncludeOptional /etc/apache2/conf.d/*.conf

@@ -43,6 +43,8 @@ _httpd_server_root:
   openSUSE Leap: /etc/apache2
   Ubuntu: /etc/apache2
 
+# This variable is used to determine where other configurations can
+# be found, like the `conf.d` directory.
 httpd_server_root: "{{ _httpd_server_root[ansible_distribution] | default(_httpd_server_root['default']) }}"
 
 _httpd_config_directory:
@@ -55,24 +57,33 @@ _httpd_config_directory:
 
 httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
 
+# Every distribution has it's own configuration.
 _httpd_config_src:
-  Alpine: httpd.conf.j2
-  Archlinux: httpd.conf.j2
-  Debian: ports.conf.j2
-  RedHat: httpd.conf.j2
-  Suse: httpd.conf.j2
+  Alpine: httpd.conf-Alpine.j2
+  Archlinux: httpd.conf-Archlinux.j2
+  Debian: apache2.conf-Debian.j2
+  RedHat: httpd.conf-RedHat.j2
+  Suse: httpd.conf-Suse.j2
 
 httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
 
 _httpd_config_dest:
   Alpine: "{{ httpd_server_root }}/httpd.conf"
   Archlinux: "{{ httpd_server_root }}/conf/httpd.conf"
-  Debian: "{{ httpd_server_root }}/ports.conf"
+  Debian: "{{ httpd_server_root }}/httpd.conf"
   RedHat: "{{ httpd_server_root }}/conf/httpd.conf"
   Suse: "{{ httpd_server_root }}/httpd.conf"
 
 httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
 
+# Some distributions have the "Listen" parameters somewhere else.
+_httpd_ports_conf:
+  Debian: ports.conf
+  Suse: listen.conf
+
+httpd_ports_conf: "{{ _httpd_ports_conf[ansible_distribution] }}"
+
+# This variable is used in `default_vhost.conf`.
 _httpd_data_directory:
   default: /var/www/html
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
@@ -81,14 +92,15 @@ _httpd_data_directory:
 
 httpd_data_directory: "{{ _httpd_data_directory[ansible_distribution] | default(_httpd_data_directory['default']) }}"
 
-_httpd_modules_path:
-  default: modules
-  Debian: /usr/lib/apache2/modules
-  Ubuntu: /usr/lib/apache2/modules
-  openSUSE Leap: /usr/lib64/apache2-prefork
+#_httpd_modules_path:
+#  default: modules
+#  Debian: /usr/lib/apache2/modules
+#  Ubuntu: /usr/lib/apache2/modules
+#  openSUSE Leap: /usr/lib64/apache2-prefork
 
-httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
+#httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
 
+# This variable is used in handlers to test the configuration.
 _httpd_binary:
   default: httpd
   Debian: apachectl
