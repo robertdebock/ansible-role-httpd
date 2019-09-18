@@ -134,6 +134,7 @@
   with_items:
     - "{{ httpd_vhosts }}"
   when:
+    - httpd_vhosts is defined
     - item.documentroot is defined
 
 - name: start and enable httpd
