@@ -19,43 +19,43 @@ _httpd_packages:
     - apache
   Debian:
     - apache2
-  openSUSE Leap:
+  Suse:
     - httpd
-  Ubuntu:
-    - apache2
+  RedHat:
+    - httpd
+    - mod_ssl
+    - openssl
 
-httpd_packages: "{{ _httpd_packages[ansible_distribution] | default(_httpd_packages['default']) }}"
+httpd_packages: "{{ _httpd_packages[ansible_os_family] | default(_httpd_packages['default']) }}"
 
 _httpd_service:
   default: httpd
   Alpine: apache2
   Debian: apache2
-  openSUSE Leap: apache2
-  Ubuntu: apache2
+  Suse: apache2
+  RedHat: httpd
 
-httpd_service: "{{ _httpd_service[ansible_distribution] | default(_httpd_service['default']) }}"
+httpd_service: "{{ _httpd_service[ansible_os_family] | default(_httpd_service['default']) }}"
 
 _httpd_server_root:
   default: /etc/httpd
   Alpine: /etc/apache2
   Archlinux: /etc/httpd
   Debian: /etc/apache2
-  openSUSE Leap: /etc/apache2
-  Ubuntu: /etc/apache2
+  Suse: /etc/apache2
 
 # This variable is used to determine where other configurations can
 # be found, like the `conf.d` directory.
-httpd_server_root: "{{ _httpd_server_root[ansible_distribution] | default(_httpd_server_root['default']) }}"
+httpd_server_root: "{{ _httpd_server_root[ansible_os_family] | default(_httpd_server_root['default']) }}"
 
 _httpd_config_directory:
   default: "{{ httpd_server_root }}/conf.d"
   Alpine: "{{ httpd_server_root }}/conf.d"
   Archlinux: "{{ httpd_server_root }}/conf/extra"
   Debian: "{{ httpd_server_root }}/conf-enabled"
-  openSUSE Leap: "{{ httpd_server_root }}/conf.d"
-  Ubuntu: "{{ httpd_server_root }}/conf-enabled"
+  Suse: "{{ httpd_server_root }}/conf.d"
 
-httpd_config_directory: "{{ _httpd_config_directory[ansible_distribution] | default(_httpd_config_directory['default']) }}"
+httpd_config_directory: "{{ _httpd_config_directory[ansible_os_family] | default(_httpd_config_directory['default']) }}"
 
 # Every distribution has it's own configuration.
 _httpd_config_src:
@@ -81,29 +81,28 @@ _httpd_ports_conf:
   Debian: ports.conf
   Suse: listen.conf
 
-httpd_ports_conf: "{{ _httpd_ports_conf[ansible_distribution] }}"
+httpd_ports_conf: "{{ _httpd_ports_conf[ansible_os_family] }}"
 
 # This variable is used in `default_vhost.conf`.
 _httpd_data_directory:
   default: /var/www/html
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
   Archlinux: /src/http
-  openSUSE Leap: /src/www/htdocs
+  RedHat: /var/www/html
+  Suse: /src/www/htdocs
 
-httpd_data_directory: "{{ _httpd_data_directory[ansible_distribution] | default(_httpd_data_directory['default']) }}"
+httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
 _httpd_modules_path:
   default: modules
   Debian: /usr/lib/apache2/modules
-  Ubuntu: /usr/lib/apache2/modules
-  openSUSE Leap: /usr/lib64/apache2-prefork
+  Suse: /usr/lib64/apache2-prefork
 
-httpd_modules_path: "{{ _httpd_modules_path[ansible_distribution] | default(_httpd_modules_path['default']) }}"
+httpd_modules_path: "{{ _httpd_modules_path[ansible_os_family] | default(_httpd_modules_path['default']) }}"
 
 # This variable is used in handlers to test the configuration.
 _httpd_binary:
   default: httpd
   Debian: apachectl
-  Ubuntu: apachectl
 
-httpd_binary: "{{ _httpd_binary[ansible_distribution] | default(_httpd_binary['default']) }}"
+httpd_binary: "{{ _httpd_binary[ansible_os_family] | default(_httpd_binary['default']) }}"
