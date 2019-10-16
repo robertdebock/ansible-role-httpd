@@ -10,6 +10,7 @@ driver:
 platforms:
   - name: default
     image: "${distribution:-robertdebock/docker-fedora-systemd:latest}"
+    command: "${command:-sleep infinity}"
     pre_build_image: yes
 provisioner:
   name: ansible

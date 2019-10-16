@@ -5,6 +5,7 @@ services:
 
 env:
   - distribution: "alpine:latest"
+    command: "sh -c \"while true ; do sleep 1 ; done\""
   - distribution: "archlinux/base"
   - distribution: "robertdebock/docker-centos-systemd:7"
   - distribution: "robertdebock/docker-centos-systemd:latest"
