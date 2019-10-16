@@ -9,7 +9,7 @@ driver:
   name: docker
 platforms:
   - name: default
-    image: "${image:-robertdebock/docker-fedora-systemd:latest}"
+    image: "${distribution:-robertdebock/docker-fedora-systemd:latest}"
     pre_build_image: yes
 provisioner:
   name: ansible
