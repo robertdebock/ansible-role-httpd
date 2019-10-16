@@ -8,7 +8,7 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: default
+  - name: "instance-${TOX_ENVNAME:-default}"
     image: "${distribution:-robertdebock/docker-fedora-systemd:latest}"
     command: sh -c "while true ; do sleep 30 ; done"
     pre_build_image: yes

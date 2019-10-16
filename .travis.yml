@@ -21,8 +21,8 @@ install:
   - pip install tox-travis
 
 script:
-  - tox -l
-  - tox
+  - tox --listenvs
+  - tox --parallel all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
