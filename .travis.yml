@@ -27,7 +27,7 @@ install:
 
 script:
   - tox --listenvs
-  - tox --parallel all
+  - tox
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
