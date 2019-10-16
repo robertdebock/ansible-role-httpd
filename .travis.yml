@@ -3,22 +3,21 @@ language: python
 services: docker
 
 env:
-  matrix
-    - ansible_version="ansible>=2.7,<2.8"
-    - ansible_version="ansible"
-    - ansible_version="git+https://github.com/ansible/ansible.git@devel"
-    - image="alpine:edge"
-    - image="alpine:latest"
-    - image="archlinux/base"
-    - image="robertdebock/docker-centos-systemd:7"
-    - image="robertdebock/docker-centos-systemd:latest"
-    - image="robertdebock/docker-debian-systemd:stable"
-    - image="robertdebock/docker-debian-systemd:unstable"
-    - image="robertdebock/docker-fedora-systemd:latest"
-    - image="robertdebock/docker-fedora-systemd:rawhide"
-    - image="opensuse/leap"
-    - image="robertdebock/docker-ubuntu-systemd:latest"
-    - image="robertdebock/docker-ubuntu-systemd:devel"
+  - ansible_version="ansible>=2.7,<2.8"
+  - ansible_version="ansible"
+  - ansible_version="git+https://github.com/ansible/ansible.git@devel"
+  - image="alpine:edge"
+  - image="alpine:latest"
+  - image="archlinux/base"
+  - image="robertdebock/docker-centos-systemd:7"
+  - image="robertdebock/docker-centos-systemd:latest"
+  - image="robertdebock/docker-debian-systemd:stable"
+  - image="robertdebock/docker-debian-systemd:unstable"
+  - image="robertdebock/docker-fedora-systemd:latest"
+  - image="robertdebock/docker-fedora-systemd:rawhide"
+  - image="opensuse/leap"
+  - image="robertdebock/docker-ubuntu-systemd:latest"
+  - image="robertdebock/docker-ubuntu-systemd:devel"
 
 matrix:
   allow_failures:
