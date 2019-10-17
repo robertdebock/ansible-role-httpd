@@ -5,22 +5,21 @@ services:
   - docker
 
 env:
-  - distribution: "alpine:latest"
-  - distribution: "alpine:edge"
-  - distribution: "archlinux/base"
-  - distribution: "robertdebock/docker-centos-systemd:7"
-  - distribution: "robertdebock/docker-centos-systemd:latest"
-  - distribution: "robertdebock/docker-debian-systemd:latest"
-  - distribution: "robertdebock/docker-debian-systemd:stable"
-  - distribution: "robertdebock/docker-debian-systemd:unstable"
-  - distribution: "robertdebock/docker-fedora-systemd:latest"
-  - distribution: "robertdebock/docker-fedora-systemd:rawhide"
-  - distribution: "opensuse/leap"
-  - distribution: "robertdebock/docker-ubuntu-systemd:latest"
-  - distribution: "robertdebock/docker-ubuntu-systemd:devel"
-  - distribution: "robertdebock/docker-ubuntu-systemd:rolling"
-
-matrix:
+  matrix:
+    - distribution="alpine:latest"
+    - distribution="alpine:edge"
+    - distribution="archlinux/base"
+    - distribution="robertdebock/docker-centos-systemd:7"
+    - distribution="robertdebock/docker-centos-systemd:latest"
+    - distribution="robertdebock/docker-debian-systemd:latest"
+    - distribution="robertdebock/docker-debian-systemd:stable"
+    - distribution="robertdebock/docker-debian-systemd:unstable"
+    - distribution="robertdebock/docker-fedora-systemd:latest"
+    - distribution="robertdebock/docker-fedora-systemd:rawhide"
+    - distribution="opensuse/leap"
+    - distribution="robertdebock/docker-ubuntu-systemd:latest"
+    - distribution="robertdebock/docker-ubuntu-systemd:devel"
+    - distribution="robertdebock/docker-ubuntu-systemd:rolling"
   allow_failures:
     - env: distribution="alpine:edge"
     - env: distribution="robertdebock/docker-debian-systemd:unstable"
