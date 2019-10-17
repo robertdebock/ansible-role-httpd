@@ -8,58 +8,18 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: httpd-alpine-edge
-    image: alpine:edge
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: httpd-alpine-latest
-    image: alpine:latest
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: httpd-archlinux
-    image: archlinux/base
-    pre_build_image: yes
-  - name: httpd-centos-latest
-    image: centos:latest
-    pre_build_image: yes
-  - name: httpd-debian-stable
-    image: debian:stable
-    pre_build_image: yes
-  - name: httpd-debian-unstable
-    image: debian:unstable
-    pre_build_image: yes
-  - name: httpd-fedora-latest
-    image: fedora:latest
-    pre_build_image: yes
-  - name: httpd-fedora-rawhide
-    image: fedora:rawhide
-    pre_build_image: yes
-  - name: httpd-opensuse-leap
-    image: opensuse/leap
-    pre_build_image: yes
-  - name: httpd-ubuntu-latest
-    image: ubuntu:latest
-    pre_build_image: yes
-  - name: httpd-ubuntu-rolling
-    image: ubuntu:rolling
-    pre_build_image: yes
-  - name: httpd-ubuntu-devel
-    image: ubuntu:devel
+  - name: "instance-${TOX_ENVNAME:-default}"
+    image: "${distribution:-robertdebock/docker-fedora-systemd:latest}"
+    command: sh -c "while true ; do sleep 30 ; done"
     pre_build_image: yes
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
-    converge: ../resources/playbook.yml
+    prepare: prepare.yml
+    converge: playbook.yml
   inventory:
-    host_vars:
-      httpd-fedora-latest:
+    group_vars:
+      all:
         ansible_python_interpreter: /usr/bin/python3
-      httpd-fedora-rawhide:
-        ansible_python_interpreter: /usr/bin/python3
-  config_options:
-    defaults:
-      stdout_callback: yaml
-      bin_ansible_callbacks: true
 scenario:
   name: default
