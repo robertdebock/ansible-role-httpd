@@ -111,8 +111,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 
 |container|tag|allow_failures|
 |---------|---|--------------|
-|amazonlinux|1|no|
-|amazonlinux|latest|no|
 |debian|unstable|yes|
 |debian|latest|no|
 |centos|7|no|
@@ -136,6 +134,7 @@ Some variarations of the build matrix do not work. These are the variations and 
 | variation                 | reason                 |
 |---------------------------|------------------------|
 | Alpine | ImportError: Error loading shared library /tmp/pip-build-env-23ZqyN/lib/python2.7/site-packages/_cffi_backend.so: Operation not permitted |
+| amazonlinux | Dependency (python_pip) not available. |
 
 
 
