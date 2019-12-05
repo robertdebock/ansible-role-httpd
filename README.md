@@ -138,7 +138,6 @@ Some variarations of the build matrix do not work. These are the variations and 
 | amazonlinux | Dependency (python_pip) not available. |
 
 
-
 Testing
 -------
 
