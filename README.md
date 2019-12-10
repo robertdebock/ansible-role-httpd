@@ -171,25 +171,6 @@ image="centos" tox
 image="debian" tag="stable" tox
 ```
 
-Modules
--------
-
-This role uses the following modules:
-```yaml
----
-- command
-- file
-- openssl_certificate
-- openssl_csr
-- openssl_privatekey
-- package
-- pip
-- seboolean
-- seport
-- service
-- template
-```
-
 License
 -------
 
