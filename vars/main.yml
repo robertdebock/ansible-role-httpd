@@ -15,8 +15,6 @@ _httpd_packages:
     - apache2
     - apache2-ssl
     - apache2-proxy
-  Archlinux:
-    - apache
   Debian:
     - apache2
   Suse:
@@ -40,7 +38,6 @@ httpd_service: "{{ _httpd_service[ansible_os_family] | default(_httpd_service['d
 _httpd_server_root:
   default: /etc/httpd
   Alpine: /etc/apache2
-  Archlinux: /etc/httpd
   Debian: /etc/apache2
   Suse: /etc/apache2
 
@@ -51,7 +48,6 @@ httpd_server_root: "{{ _httpd_server_root[ansible_os_family] | default(_httpd_se
 _httpd_config_directory:
   default: "{{ httpd_server_root }}/conf.d"
   Alpine: "{{ httpd_server_root }}/conf.d"
-  Archlinux: "{{ httpd_server_root }}/conf/extra"
   Debian: "{{ httpd_server_root }}/conf-enabled"
   Suse: "{{ httpd_server_root }}/conf.d"
 
@@ -60,7 +56,6 @@ httpd_config_directory: "{{ _httpd_config_directory[ansible_os_family] | default
 # Every distribution has it's own configuration.
 _httpd_config_src:
   Alpine: httpd.conf-Alpine.j2
-  Archlinux: httpd.conf-Archlinux.j2
   Debian: apache2.conf-Debian.j2
   RedHat: httpd.conf-RedHat.j2
   Suse: httpd.conf-Suse.j2
@@ -69,7 +64,6 @@ httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
 
 _httpd_config_dest:
   Alpine: "{{ httpd_server_root }}/httpd.conf"
-  Archlinux: "{{ httpd_server_root }}/conf/httpd.conf"
   Debian: "{{ httpd_server_root }}/httpd.conf"
   RedHat: "{{ httpd_server_root }}/conf/httpd.conf"
   Suse: "{{ httpd_server_root }}/httpd.conf"
@@ -87,7 +81,6 @@ httpd_ports_conf: "{{ _httpd_ports_conf[ansible_os_family] }}"
 _httpd_data_directory:
   default: /var/www/html
   Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
-  Archlinux: /src/http
   RedHat: /var/www/html
   Suse: /src/www/htdocs
 
