@@ -57,6 +57,29 @@ The machine you are running this on, may need to be prepared, I use this playboo
     - robertdebock.python_pip
 ```
 
+After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+```yaml
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: check if ports are open
+      wait_for:
+        port: "{{ item }}"
+        timeout: 2
+      loop:
+        - "80"
+        - "443"
+
+    - name: interact with webserver
+      uri:
+        url: "https://127.0.0.1/mylocation1/"
+        status_code: 503
+        validate_certs: no
+```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 

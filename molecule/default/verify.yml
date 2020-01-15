@@ -1,0 +1,20 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: check if ports are open
+      wait_for:
+        port: "{{ item }}"
+        timeout: 2
+      loop:
+        - "80"
+        - "443"
+
+    - name: interact with webserver
+      uri:
+        url: "https://127.0.0.1/mylocation1/"
+        status_code: 503
+        validate_certs: no
