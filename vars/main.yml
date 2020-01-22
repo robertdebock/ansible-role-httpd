@@ -19,10 +19,6 @@ _httpd_packages:
     - apache2
   Suse:
     - httpd
-  RedHat:
-    - httpd
-    - mod_ssl
-    - openssl
 
 httpd_packages: "{{ _httpd_packages[ansible_os_family] | default(_httpd_packages['default']) }}"
 
