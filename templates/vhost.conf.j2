@@ -12,13 +12,27 @@ LoadModule proxy_http_module {{ httpd_modules_path }}/mod_proxy_http.so
 {% endif %}
 {% if item.backend_url is defined %}
 {% if "https" in item.backend_url %}
-    SSLProxyEngine on
+   SSLProxyEngine on
 {% endif %}
-   ProxyPreserveHost On
-   ProxyPass / {{ item.backend_url }}
+   {% if item.proxy_preserve_host is defined and item.proxy_preserve_host is sameas true %}
+ProxyPreserveHost On
+   {% elif item.proxy_preserve_host is defined and item.proxy_preserve_host is sameas false %}
+ProxyPreserveHost Off
+   {% endif %}
+ProxyPass / {{ item.backend_url }}
    ProxyPassReverse / {{ item.backend_url }}
 {% endif %}
 {% if item.remote is defined %}
   ProxyRemote * {{ item.remote }}
+{% endif %}
+{% if item.proxy_requests is defined and item.proxy_requests is sameas true %}
+   ProxyRequests On
+{% elif item.proxy_requests is defined and item.proxy_requests is sameas false %}
+   ProxyRequests Off
+{% endif %}
+{% if item.setenv is defined %}
+{% for env in item.setenv %}
+   SetEnv {{ env.name }} {{ env.value | default("") }}
+{% endfor %}
 {% endif %}
 </VirtualHost>

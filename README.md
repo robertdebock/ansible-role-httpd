@@ -37,6 +37,19 @@ This example is taken from `molecule/resources/playbook.yml` and is tested on ea
       - name: backend_https
         servername: www4.example.com
         backend_url: https://www.example.com/
+      - name: piratebay
+        servername: piratebay.nl
+        backend_url: https://piratebay.se/
+        proxy_preserve_host: Off
+        proxy_requests: Off
+        setenv:
+          - name: force-proxy-request-1.0
+            value: 1
+          - name: proxy-nokeepalive
+            value: 1
+          - name: proxy-initial-not-pooled
+          - name: proxy-sendchunks
+            value: 1
 
   roles:
     - robertdebock.httpd
@@ -102,6 +115,9 @@ httpd_ssl_servername: "{{ ansible_fqdn }}"
 
 # For SSL a TCP port is required.
 httpd_ssl_port: 443
+
+# Set ProxyPreserveHost
+httpd_proxy_preserve_host: On
 ```
 
 Requirements
