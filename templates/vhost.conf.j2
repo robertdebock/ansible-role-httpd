@@ -36,3 +36,37 @@ ProxyPass / {{ item.backend_url }}
 {% endfor %}
 {% endif %}
 </VirtualHost>
+
+<VirtualHost *:{{ httpd_ssl_port }}>
+   ServerName {{ item.servername }}
+{% if item.documentroot is defined %}
+   DocumentRoot "{{ item.documentroot }}"
+{% endif %}
+{% if item.backend_url is defined %}
+{% if "https" in item.backend_url %}
+  SSLProxyEngine on
+   SSLCertificateFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
+   SSLCertificateKeyFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
+{% endif %}
+   {% if item.proxy_preserve_host is defined and item.proxy_preserve_host is sameas true %}
+ProxyPreserveHost On
+   {% elif item.proxy_preserve_host is defined and item.proxy_preserve_host is sameas false %}
+ProxyPreserveHost Off
+   {% endif %}
+ProxyPass / {{ item.backend_url }}
+   ProxyPassReverse / {{ item.backend_url }}
+{% endif %}
+{% if item.remote is defined %}
+  ProxyRemote * {{ item.remote }}
+{% endif %}
+{% if item.proxy_requests is defined and item.proxy_requests is sameas true %}
+   ProxyRequests On
+{% elif item.proxy_requests is defined and item.proxy_requests is sameas false %}
+   ProxyRequests Off
+{% endif %}
+{% if item.setenv is defined %}
+{% for env in item.setenv %}
+   SetEnv {{ env.name }} {{ env.value | default("") }}
+{% endfor %}
+{% endif %}
+</VirtualHost>
