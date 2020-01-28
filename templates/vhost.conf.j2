@@ -12,7 +12,7 @@ LoadModule proxy_http_module {{ httpd_modules_path }}/mod_proxy_http.so
 {% endif %}
 {% if item.backend_url is defined %}
 {% if "https" in item.backend_url %}
-   SSLProxyEngine on
+  SSLProxyEngine on
 {% endif %}
    {% if item.proxy_preserve_host is defined and item.proxy_preserve_host is sameas true %}
 ProxyPreserveHost On
