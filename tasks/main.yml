@@ -24,8 +24,7 @@
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-  with_items:
-    - "{{ httpd_sebooleans }}"
+  loop: "{{ httpd_sebooleans }}"
 
 - name: allow connections to custom port
   seport:
@@ -36,7 +35,7 @@
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-  with_items:
+  loop:
     - "{{ httpd_port }}"
     - "{{ httpd_ssl_port }}"
 
@@ -76,8 +75,7 @@
   template:
     src: location.conf.j2
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
-  with_items:
-    - "{{ httpd_locations }}"
+  loop: "{{ httpd_locations }}"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -90,8 +88,7 @@
   template:
     src: vhost.conf.j2
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
-  with_items:
-    - "{{ httpd_vhosts }}"
+  loop: "{{ httpd_vhosts }}"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -131,8 +128,7 @@
   file:
     path: "{{ item.documentroot }}"
     state: directory
-  with_items:
-    - "{{ httpd_vhosts }}"
+  loop: "{{ httpd_vhosts }}"
   when:
     - httpd_vhosts is defined
     - item.documentroot is defined
