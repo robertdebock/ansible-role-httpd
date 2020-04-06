@@ -61,10 +61,10 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
   become: yes
 
   roles:
-    - robertdebock.bootstrap
-    - robertdebock.epel
-    - robertdebock.buildtools
-    - robertdebock.python_pip
+    - role: robertdebock.bootstrap
+    - role: robertdebock.epel
+    - role: robertdebock.buildtools
+    - role: robertdebock.python_pip
 ```
 
 For verification `molecule/resources/verify.yml` run after the role has been applied.
