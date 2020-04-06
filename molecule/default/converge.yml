@@ -37,4 +37,4 @@
             value: 1
 
   roles:
-    - ansible-role-httpd
+    - role: ansible-role-httpd

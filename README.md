@@ -49,7 +49,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
             value: 1
 
   roles:
-    - robertdebock.httpd
+    - role: robertdebock.httpd
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
