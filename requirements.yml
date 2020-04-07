@@ -3,3 +3,4 @@
 - robertdebock.buildtools
 - robertdebock.epel
 - robertdebock.python_pip
+- robertdebock.selinux
