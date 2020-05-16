@@ -47,20 +47,20 @@
 - name: create ssl key
   openssl_privatekey:
     path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
-  register: key
+  register: httpd_key
 
 - name: create ssl csr
   openssl_csr:
     path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.csr"
-    privatekey_path: "{{ key.filename }}"
+    privatekey_path: "{{ httpd_key.filename }}"
     common_name: "{{ httpd_ssl_servername }}"
-  register: csr
+  register: httpd_csr
 
 - name: create ssl certificates
   openssl_certificate:
     path: "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
-    privatekey_path: "{{ csr.privatekey }}"
-    csr_path: "{{ csr.filename }}"
+    privatekey_path: "{{ httpd_csr.privatekey }}"
+    csr_path: "{{ httpd_csr.filename }}"
     provider: selfsigned
 
 - name: configure ssl
