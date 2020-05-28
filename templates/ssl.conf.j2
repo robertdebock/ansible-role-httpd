@@ -6,6 +6,6 @@ Listen {{ httpd_ssl_port }}
 <VirtualHost *:{{ httpd_ssl_port }}>
     ServerName {{ httpd_ssl_servername }}
     SSLEngine on
-    SSLCertificateFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.crt"
-    SSLCertificateKeyFile "{{ httpd_config_directory }}/ssl/{{ httpd_ssl_servername }}.key"
+    SSLCertificateFile "{{ httpd_openssl_crt_directory }}/apache-httpd.crt"
+    SSLCertificateKeyFile "{{ httpd_openssl_key_directory }}/apache-httpd.key"
 </VirtualHost>
