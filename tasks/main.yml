@@ -113,7 +113,7 @@
     - test httpd configuration validity
     - restart httpd
   when:
-    - ansible_os_family == "Debian"
+    - ansible_os_family == "Debian" or
       ansible_os_family == "Suse"
 
 - name: configure redirect from http to https
