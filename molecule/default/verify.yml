@@ -19,4 +19,5 @@
         status_code: 
           - 502
           - 503
+          - 404
         validate_certs: no
