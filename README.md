@@ -65,6 +65,10 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
     - role: robertdebock.epel
     - role: robertdebock.buildtools
     - role: robertdebock.python_pip
+    - role: robertdebock.openssl
+      openssl_items:
+        - name: apache-httpd
+          common_name: "{{ ansible_fqdn }}"
 ```
 
 For verification `molecule/resources/verify.yml` run after the role has been applied.
@@ -88,6 +92,8 @@ For verification `molecule/resources/verify.yml` run after the role has been app
       uri:
         url: "https://127.0.0.1:8443/mylocation1/"
         status_code: 
+          - 404
+          - 500
           - 502
           - 503
         validate_certs: no
@@ -130,6 +136,7 @@ The following roles can be installed to ensure all requirements are met, using `
 - robertdebock.bootstrap
 - robertdebock.buildtools
 - robertdebock.epel
+- robertdebock.openssl
 - robertdebock.python_pip
 - robertdebock.selinux
 
