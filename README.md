@@ -16,40 +16,40 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   become: yes
   gather_facts: yes
 
-  vars:
-    httpd_locations:
-      - name: mylocation1
-        location: /mylocation1
-        backend_url: "http://localhost:8080/myapplication"
-    httpd_vhosts:
-      - name: docroot
-        servername: www1.example.com
-        documentroot: /var/www/html/www1.example.com
-      - name: backend_http
-        servername: www2.example.com
-        backend_url: "http://www.example.com/"
-      - name: remote
-        servername: www3.example.com
-        remote: "http://localhost:3128/"
-      - name: backend_https
-        servername: www4.example.com
-        backend_url: "https://www.example.com/"
-      - name: piratebay
-        servername: piratebay.nl
-        backend_url: "https://thepirate-bay.org/"
-        proxy_preserve_host: Off
-        proxy_requests: Off
-        setenv:
-          - name: force-proxy-request-1.0
-            value: 1
-          - name: proxy-nokeepalive
-            value: 1
-          - name: proxy-initial-not-pooled
-          - name: proxy-sendchunks
-            value: 1
-
   roles:
     - role: robertdebock.httpd
+      httpd_port: 8080
+      httpd_ssl_port: 8443
+      httpd_locations:
+        - name: mylocation1
+          location: /mylocation1
+          backend_url: "http://localhost:8080/myapplication"
+      httpd_vhosts:
+        - name: docroot
+          servername: www1.example.com
+          documentroot: /var/www/html/www1.example.com
+        - name: backend_http
+          servername: www2.example.com
+          backend_url: "http://www.example.com/"
+        - name: remote
+          servername: www3.example.com
+          remote: "http://localhost:3128/"
+        - name: backend_https
+          servername: www4.example.com
+          backend_url: "https://www.example.com/"
+        - name: piratebay
+          servername: piratebay.nl
+          backend_url: "https://thepirate-bay.org/"
+          proxy_preserve_host: Off
+          proxy_requests: Off
+          setenv:
+            - name: force-proxy-request-1.0
+              value: 1
+            - name: proxy-nokeepalive
+              value: 1
+            - name: proxy-initial-not-pooled
+            - name: proxy-sendchunks
+              value: 1
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
@@ -81,13 +81,15 @@ For verification `molecule/resources/verify.yml` run after the role has been app
         port: "{{ item }}"
         timeout: 2
       loop:
-        - "80"
-        - "443"
+        - "8080"
+        - "8443"
 
     - name: interact with webserver
       uri:
-        url: "https://127.0.0.1/mylocation1/"
-        status_code: 503
+        url: "https://127.0.0.1:8443/mylocation1/"
+        status_code: 
+          - 502
+          - 503
         validate_certs: no
 ```
 
@@ -142,7 +144,7 @@ Here is an overview of related roles:
 
 ## Compatibility
 
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
@@ -150,7 +152,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |el|7, 8|
 |debian|buster, bullseye|
 |fedora|31, 32|
-|opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:
