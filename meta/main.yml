@@ -22,6 +22,9 @@ galaxy_info:
       versions:
         - 31
         - 32
+    - name: OpenSUSE
+      versions:
+        - all
     - name: Ubuntu
       versions:
         - focal
