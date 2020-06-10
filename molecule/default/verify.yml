@@ -2,7 +2,15 @@
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: no
+  gather_facts: yes
+
+  vars:
+    _httpd_data_directory:
+      default: /var/www/html
+      Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+      Suse: /src/www/htdocs
+    
+    httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
   tasks:
     - name: check if ports are open
@@ -13,14 +21,14 @@
         - "8080"
         - "8443"
 
-    - name: interact with webserver
+    - name: place sample index.html
+      copy:
+        content: "Hello World!"
+        dest: "{{ httpd_data_directory }}/index.html"
+
+    - name: see if the sample index.html returns 200
       uri:
-        url: "https://127.0.0.1:8443/mylocation1/"
-        status_code: 
-          - 404
-          - 500
-          - 502
-          - 503
+        url: "https://127.0.0.1:8443/"
         validate_certs: no
 
     - name: see if TRACE option returns 405
