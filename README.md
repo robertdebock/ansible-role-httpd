@@ -82,8 +82,8 @@ For verification `molecule/resources/verify.yml` run after the role has been app
   vars:
     _httpd_data_directory:
       default: /var/www/html
-      Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
-      Suse: /src/www/htdocs
+      Alpine: /var/www/localhost
+      Suse: /srv/www/htdocs
     
     httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
