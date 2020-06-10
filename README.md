@@ -77,7 +77,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
     - name: check if ports are open
@@ -96,6 +96,14 @@ For verification `molecule/resources/verify.yml` run after the role has been app
           - 500
           - 502
           - 503
+        validate_certs: no
+
+    - name: see if TRACE option returns 405
+      uri:
+        url: "https://127.0.0.1:8443/"
+        method: TRACE
+        status_code:
+          - 405
         validate_certs: no
 ```
 
