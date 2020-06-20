@@ -27,6 +27,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       httpd_vhosts:
         - name: docroot
           servername: www1.example.com
+          options: +Indexes +FollowSymLinks -MultiViews
           documentroot: /var/www/html/www1.example.com
         - name: backend_http
           servername: www2.example.com
@@ -84,7 +85,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
       default: /var/www/html
       Alpine: /var/www/localhost
       Suse: /srv/www/htdocs
-    
+
     httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
   tasks:

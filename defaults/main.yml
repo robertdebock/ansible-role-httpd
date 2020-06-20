@@ -15,3 +15,9 @@ httpd_ssl_port: 443
 
 # Set ProxyPreserveHost
 httpd_proxy_preserve_host: On
+
+# SSL Certificate:
+httpd_openssl_crt: localhost.crt
+
+# SSL Key
+httpd_openssl_key: localhost.key
