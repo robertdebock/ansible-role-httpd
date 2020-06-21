@@ -28,9 +28,9 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         - name: docroot
           servername: www1.example.com
           options:
-            - +Indexes
-            - +FollowSymLinks
-            - -MultiViews
+            - "+Indexes"
+            - "+FollowSymLinks"
+            - "-MultiViews"
           documentroot: /var/www/html/www1.example.com
         - name: backend_http
           servername: www2.example.com
