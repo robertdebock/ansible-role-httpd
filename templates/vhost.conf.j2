@@ -12,6 +12,9 @@
 
 <VirtualHost *:{{ httpd_port }}>
    ServerName {{ item.servername }}
+{% if item.options is defined %}
+   Options {{ item.options|join(' ') }}
+{% endif %}
 {% if item.documentroot is defined %}
    DocumentRoot "{{ item.documentroot }}"
 {% endif %}
