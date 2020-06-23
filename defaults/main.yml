@@ -17,7 +17,7 @@ httpd_ssl_port: 443
 httpd_proxy_preserve_host: On
 
 # SSL Certificate:
-httpd_openssl_crt: localhost.crt
+httpd_openssl_crt: "{{ httpd_openssl_crt_directory }}/apache-httpd.crt"
 
 # SSL Key
-httpd_openssl_key: localhost.key
+httpd_openssl_key: "{{ httpd_openssl_key_directory }}/apache-httpd.key"
