@@ -1,0 +1,75 @@
+---
+- name: test if httpd_servername is set correctly
+  assert:
+    that:
+      - httpd_servername is defined
+      - httpd_servername | length > 0
+
+- name: test if httpd_port is set correctly
+  assert:
+    that:
+      - httpd_port is defined
+      - httpd_port | int
+      - httpd_port | int > 0
+      - httpd_port | int < 65536
+
+- name: test if httpd_ssl_servername is set correctly
+  assert:
+    that:
+      - httpd_ssl_servername is defined
+      - httpd_ssl_servername | length > 0
+
+- name: test if httpd_ssl_port is set correctly
+  assert:
+    that:
+      - httpd_ssl_port is defined
+      - httpd_ssl_port | int
+      - httpd_ssl_port | int > 0
+      - httpd_ssl_port | int < 65535
+      - httpd_ssl_port != httpd_port
+
+- name: test if httpd_proxy_preserve_host is set correctly
+  assert:
+    that:
+      - httpd_proxy_preserve_host is defined
+      - httpd_proxy_preserve_host | type_debug == "bool"
+
+- name: test if httpd_locations is set correctly
+  assert:
+    that:
+      - httpd_locations | length > 0
+      - httpd_locations is iterable
+  when:
+    - httpd_locations is defined
+
+- name: test if item in httpd_locations is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+      - item.location is defined
+      - item.location | length > 0
+      - item.backend_url is defined
+      - item.backend_url | length > 0
+  loop: "{{ httpd_locations }}"
+  when:
+    - httpd_locations is defined
+
+- name: test if httpd_vhosts is set correctly
+  assert:
+    that:
+      - httpd_vhosts | length > 0
+      - httpd_vhosts is iterable
+  when:
+    - httpd_vhosts is defined
+
+- name: test if item in httpd_vhosts is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+      - item.servername is defined
+      - item.servername | length > 0
+  loop: "{{ httpd_vhosts }}"
+  when:
+    - httpd_vhosts is defined
