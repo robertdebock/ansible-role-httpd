@@ -51,6 +51,7 @@
       - item.location | length > 0
       - item.backend_url is defined
       - item.backend_url | length > 0
+    quiet: yes
   loop: "{{ httpd_locations }}"
   when:
     - httpd_locations is defined
@@ -70,6 +71,7 @@
       - item.name | length > 0
       - item.servername is defined
       - item.servername | length > 0
+    quiet: yes
   loop: "{{ httpd_vhosts }}"
   when:
     - httpd_vhosts is defined
