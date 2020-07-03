@@ -27,10 +27,6 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       httpd_vhosts:
         - name: docroot
           servername: www1.example.com
-          options:
-            - "+Indexes"
-            - "+FollowSymLinks"
-            - "-MultiViews"
           documentroot: /var/www/html/www1.example.com
         - name: backend_http
           servername: www2.example.com
@@ -88,7 +84,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
       default: /var/www/html
       Alpine: /var/www/localhost
       Suse: /srv/www/htdocs
-
+    
     httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
   tasks:
@@ -142,6 +138,12 @@ httpd_ssl_port: 443
 
 # Set ProxyPreserveHost
 httpd_proxy_preserve_host: On
+
+# SSL Certificate:
+httpd_openssl_crt: "{{ httpd_openssl_crt_directory }}/apache-httpd.crt"
+
+# SSL Key
+httpd_openssl_key: "{{ httpd_openssl_key_directory }}/apache-httpd.key"
 ```
 
 ## [Requirements](#requirements)
