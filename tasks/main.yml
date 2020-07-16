@@ -7,9 +7,6 @@
   package:
     name: "{{ httpd_packages }}"
     state: present
-  register: httpd_install_apache_httpd
-  until: httpd_install_apache_httpd is succeeded
-  retries: 3
 
 - name: modify selinux settings
   seboolean:
