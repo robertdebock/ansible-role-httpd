@@ -4,6 +4,7 @@
     that:
       - httpd_servername is defined
       - httpd_servername | length > 0
+    quiet: yes
 
 - name: test if httpd_port is set correctly
   assert:
@@ -12,12 +13,14 @@
       - httpd_port | int
       - httpd_port | int > 0
       - httpd_port | int < 65536
+    quiet: yes
 
 - name: test if httpd_ssl_servername is set correctly
   assert:
     that:
       - httpd_ssl_servername is defined
       - httpd_ssl_servername | length > 0
+    quiet: yes
 
 - name: test if httpd_ssl_port is set correctly
   assert:
@@ -27,18 +30,21 @@
       - httpd_ssl_port | int > 0
       - httpd_ssl_port | int < 65535
       - httpd_ssl_port != httpd_port
+    quiet: yes
 
 - name: test if httpd_proxy_preserve_host is set correctly
   assert:
     that:
       - httpd_proxy_preserve_host is defined
       - httpd_proxy_preserve_host | type_debug == "bool"
+    quiet: yes
 
 - name: test if httpd_locations is set correctly
   assert:
     that:
       - httpd_locations | length > 0
       - httpd_locations is iterable
+    quiet: yes
   when:
     - httpd_locations is defined
 
@@ -63,6 +69,7 @@
     that:
       - httpd_vhosts | length > 0
       - httpd_vhosts is iterable
+    quiet: yes
   when:
     - httpd_vhosts is defined
 
