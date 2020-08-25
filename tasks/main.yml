@@ -35,6 +35,7 @@
   template:
     src: ssl.conf.j2
     dest: "{{ httpd_config_directory }}/ssl.conf"
+    mode: "0644"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -43,6 +44,7 @@
   template:
     src: location.conf.j2
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
+    mode: "0644"
   loop: "{{ httpd_locations }}"
   notify:
     - test httpd configuration validity
@@ -56,6 +58,7 @@
   template:
     src: vhost.conf.j2
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
+    mode: "0644"
   loop: "{{ httpd_vhosts }}"
   notify:
     - test httpd configuration validity
@@ -69,6 +72,7 @@
   template:
     src: "{{ httpd_config_src }}"
     dest: "{{ httpd_config_dest }}"
+    mode: "0644"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -77,6 +81,7 @@
   template:
     src: "{{ httpd_ports_conf }}.j2"
     dest: "{{ httpd_server_root }}/{{ httpd_ports_conf }}"
+    mode: "0644"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -88,6 +93,7 @@
   template:
     src: default_vhost.conf.j2
     dest: "{{ httpd_config_directory }}/default_vhost.conf"
+    mode: "0644"
   notify:
     - test httpd configuration validity
     - restart httpd
@@ -96,6 +102,7 @@
   file:
     path: "{{ item.documentroot }}"
     state: directory
+    mode: "0755"
   loop: "{{ httpd_vhosts }}"
   when:
     - httpd_vhosts is defined
