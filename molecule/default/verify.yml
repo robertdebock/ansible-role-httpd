@@ -25,6 +25,7 @@
       copy:
         content: "Hello World!"
         dest: "{{ httpd_data_directory }}/index.html"
+        mode: "0644"
 
     - name: see if the sample index.html returns 200
       uri:
