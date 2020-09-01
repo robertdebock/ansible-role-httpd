@@ -84,7 +84,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
       default: /var/www/html
       Alpine: /var/www/localhost
       Suse: /srv/www/htdocs
-    
+
     httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
 
   tasks:
@@ -100,6 +100,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
       copy:
         content: "Hello World!"
         dest: "{{ httpd_data_directory }}/index.html"
+        mode: "0644"
 
     - name: see if the sample index.html returns 200
       uri:
