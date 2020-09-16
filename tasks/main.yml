@@ -108,6 +108,9 @@
     - httpd_vhosts is defined
     - item.documentroot is defined
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: start and enable httpd
   service:
     name: "{{ httpd_service }}"
