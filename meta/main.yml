@@ -38,6 +38,5 @@ galaxy_info:
     - httpd
     - installer
     - package
-    - centos
 
 dependencies: []
