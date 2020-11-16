@@ -3,7 +3,6 @@
   assert:
     that:
       - httpd_servername is defined
-      - httpd_servername | length > 0
     quiet: yes
 
 - name: test if httpd_port is set correctly
@@ -19,7 +18,6 @@
   assert:
     that:
       - httpd_ssl_servername is defined
-      - httpd_ssl_servername | length > 0
     quiet: yes
 
 - name: test if httpd_ssl_port is set correctly
@@ -42,7 +40,6 @@
 - name: test if httpd_locations is set correctly
   assert:
     that:
-      - httpd_locations | length > 0
       - httpd_locations is iterable
     quiet: yes
   when:
@@ -52,11 +49,8 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.location is defined
-      - item.location | length > 0
       - item.backend_url is defined
-      - item.backend_url | length > 0
     quiet: yes
   loop: "{{ httpd_locations }}"
   loop_control:
@@ -67,7 +61,6 @@
 - name: test if httpd_vhosts is set correctly
   assert:
     that:
-      - httpd_vhosts | length > 0
       - httpd_vhosts is iterable
     quiet: yes
   when:
@@ -77,9 +70,7 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.servername is defined
-      - item.servername | length > 0
     quiet: yes
   loop: "{{ httpd_vhosts }}"
   loop_control:
