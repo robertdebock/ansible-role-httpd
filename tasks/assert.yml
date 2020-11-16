@@ -10,8 +10,8 @@
     that:
       - httpd_port is defined
       - httpd_port is number
-      - httpd_port | int > 0
-      - httpd_port | int < 65536
+      - httpd_port > 0
+      - httpd_port < 65536
     quiet: yes
 
 - name: test if httpd_ssl_servername is set correctly
@@ -25,8 +25,8 @@
     that:
       - httpd_ssl_port is defined
       - httpd_ssl_port is number
-      - httpd_ssl_port | int > 0
-      - httpd_ssl_port | int < 65535
+      - httpd_ssl_port > 0
+      - httpd_ssl_port < 65535
       - httpd_ssl_port != httpd_port
     quiet: yes
 
