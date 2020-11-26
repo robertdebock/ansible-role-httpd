@@ -1,4 +1,5 @@
 ---
+
 - name: test if httpd_servername is set correctly
   assert:
     that:
