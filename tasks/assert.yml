@@ -4,6 +4,7 @@
   assert:
     that:
       - httpd_servername is defined
+      - httpd_servername is string
     quiet: yes
 
 - name: test if httpd_port is set correctly
@@ -19,6 +20,7 @@
   assert:
     that:
       - httpd_ssl_servername is defined
+      - httpd_ssl_servername is string
     quiet: yes
 
 - name: test if httpd_ssl_port is set correctly
@@ -50,8 +52,11 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.location is defined
+      - item.location is string
       - item.backend_url is defined
+      - item.backend_url is string
     quiet: yes
   loop: "{{ httpd_locations }}"
   loop_control:
@@ -71,7 +76,9 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.servername is defined
+      - item.servername is string
     quiet: yes
   loop: "{{ httpd_vhosts }}"
   loop_control:
