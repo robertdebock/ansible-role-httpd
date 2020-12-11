@@ -10,28 +10,30 @@
     name: "{{ httpd_packages }}"
     state: present
 
-- name: modify selinux settings
-  seboolean:
-    name: "{{ item }}"
-    state: yes
-    persistent: yes
-  when:
-    - ansible_selinux.status is defined
-    - ansible_selinux.status == "enabled"
-  loop: "{{ httpd_sebooleans }}"
+- name: configure selinux
+  block:
+    - name: modify selinux settings
+      seboolean:
+        name: "{{ item }}"
+        state: yes
+        persistent: yes
+      when:
+        - ansible_selinux.status is defined
+        - ansible_selinux.status == "enabled"
+      loop: "{{ httpd_sebooleans }}"
 
-- name: allow connections to custom port
-  seport:
-    ports: "{{ item }}"
-    proto: tcp
-    setype: http_port_t
-    state: present
+    - name: allow connections to custom port
+      seport:
+        ports: "{{ item }}"
+        proto: tcp
+        setype: http_port_t
+        state: present
+      loop:
+        - "{{ httpd_port }}"
+        - "{{ httpd_ssl_port }}"
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-  loop:
-    - "{{ httpd_port }}"
-    - "{{ httpd_ssl_port }}"
 
 - name: configure ssl
   template:
@@ -88,8 +90,7 @@
     - test httpd configuration validity
     - restart httpd
   when:
-    - ansible_os_family == "Debian" or
-      ansible_os_family == "Suse"
+    - ansible_os_family in [ "Debian", "Suse" ]
 
 - name: configure redirect from http to https
   template:
