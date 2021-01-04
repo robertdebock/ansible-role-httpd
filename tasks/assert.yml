@@ -33,13 +33,6 @@
       - httpd_ssl_port != httpd_port
     quiet: yes
 
-- name: test if httpd_proxy_preserve_host is set correctly
-  assert:
-    that:
-      - httpd_proxy_preserve_host is defined
-      - httpd_proxy_preserve_host is boolean
-    quiet: yes
-
 - name: test if httpd_locations is set correctly
   assert:
     that:

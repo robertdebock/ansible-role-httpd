@@ -92,9 +92,6 @@ httpd_ssl_servername: "{{ ansible_fqdn }}"
 # For SSL a TCP port is required.
 httpd_ssl_port: 443
 
-# Set ProxyPreserveHost
-httpd_proxy_preserve_host: On
-
 # SSL Certificate:
 httpd_openssl_crt: "{{ httpd_openssl_crt_directory }}/apache-httpd.crt"
 
