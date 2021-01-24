@@ -15,6 +15,7 @@ _httpd_packages:
     - apache2-proxy
   Debian:
     - apache2
+    - w3m
   Suse:
     - httpd
 
