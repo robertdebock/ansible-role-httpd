@@ -31,6 +31,9 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         - name: backend_http
           servername: www2.example.com
           backend_url: "http://www.example.com/"
+          serveralias:
+            - example.com
+            - www.example.com
         - name: remote
           servername: www3.example.com
           remote: "http://localhost:3128/"
