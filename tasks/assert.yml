@@ -78,3 +78,15 @@
     label: "{{ item.name }}"
   when:
     - httpd_vhosts is defined
+
+- name: test if item.serveralias in httpd_vhosts is set correctly
+  assert:
+    that:
+      - item.serveralias is iterable
+    quiet: yes
+  loop: "{{ httpd_vhosts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - httpd_vhosts is defined
+    - item.serveralias is defined
