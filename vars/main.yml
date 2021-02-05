@@ -75,7 +75,7 @@ httpd_ports_conf: "{{ _httpd_ports_conf[ansible_os_family] }}"
 # This variable is used in `default_vhost.conf`.
 _httpd_data_directory:
   default: /var/www/html
-  Alpine: /var/www/{{ httpd_servername | default(ansible_fqdn) }}
+  Alpine: /var/www/{{ httpd_servername | default('localhost') }}/htdocs
   Suse: /srv/www/htdocs
 
 httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
