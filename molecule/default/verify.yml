@@ -4,13 +4,7 @@
   become: yes
   gather_facts: yes
 
-  vars:
-    _httpd_data_directory:
-      default: /var/www/html
-      Alpine: /var/www/localhost
-      Suse: /srv/www/htdocs
-
-    httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
+  vars_files: ../../vars/main.yml
 
   tasks:
     - name: check if ports are open
