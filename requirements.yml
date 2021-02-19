@@ -6,5 +6,3 @@ roles:
   - name: robertdebock.openssl
   - name: robertdebock.python_pip
   - name: robertdebock.selinux
-collections:
-  - name: ansible.builtin
