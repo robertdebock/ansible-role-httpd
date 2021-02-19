@@ -1,14 +1,14 @@
 ---
 
 - name: test if httpd_servername is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_servername is defined
       - httpd_servername is string
     quiet: yes
 
 - name: test if httpd_port is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_port is defined
       - httpd_port is number
@@ -17,14 +17,14 @@
     quiet: yes
 
 - name: test if httpd_ssl_servername is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_ssl_servername is defined
       - httpd_ssl_servername is string
     quiet: yes
 
 - name: test if httpd_ssl_port is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_ssl_port is defined
       - httpd_ssl_port is number
@@ -34,7 +34,7 @@
     quiet: yes
 
 - name: test if httpd_locations is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_locations is iterable
     quiet: yes
@@ -42,7 +42,7 @@
     - httpd_locations is defined
 
 - name: test if item in httpd_locations is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -58,7 +58,7 @@
     - httpd_locations is defined
 
 - name: test if httpd_vhosts is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - httpd_vhosts is iterable
     quiet: yes
@@ -66,7 +66,7 @@
     - httpd_vhosts is defined
 
 - name: test if item in httpd_vhosts is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -80,7 +80,7 @@
     - httpd_vhosts is defined
 
 - name: test if item.serveralias in httpd_vhosts is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.serveralias is iterable
     quiet: yes

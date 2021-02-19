@@ -6,7 +6,7 @@
   changed_when: no
 
 - name: restart httpd
-  service:
+  ansible.builtin.service:
     name: "{{ httpd_service }}"
     state: restarted
   when:
