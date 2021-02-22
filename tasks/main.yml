@@ -14,7 +14,7 @@
 - name: configure selinux
   block:
     - name: modify selinux settings
-      seboolean:
+      ansible.posix.seboolean:
         name: "{{ item }}"
         state: yes
         persistent: yes
@@ -24,7 +24,7 @@
       loop: "{{ httpd_sebooleans }}"
 
     - name: allow connections to custom port
-      seport:
+      community.general.seport:
         ports: "{{ item }}"
         proto: tcp
         setype: http_port_t
