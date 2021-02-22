@@ -2,7 +2,7 @@
 # handlers file for httpd
 
 - name: test httpd configuration validity
-  command: "{{ httpd_binary }} -t"
+  ansible.builtin.command: "{{ httpd_binary }} -t"
   changed_when: no
 
 - name: restart httpd
