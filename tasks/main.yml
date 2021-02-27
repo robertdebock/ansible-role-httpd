@@ -109,7 +109,7 @@
     mode: "0755"
   loop: "{{ httpd_vhosts }}"
   loop_control:
-    label: "{{ item.docroot }}"
+    label: "{{ item.name }}"
   when:
     - httpd_vhosts is defined
     - item.documentroot is defined
