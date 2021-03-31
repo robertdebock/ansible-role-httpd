@@ -8,7 +8,7 @@
 
   tasks:
     - name: check if ports are open
-      wait_for:
+      ansible.builtin.wait_for:
         port: "{{ item }}"
         timeout: 2
       loop:
@@ -16,18 +16,18 @@
         - "8443"
 
     - name: place sample index.html
-      copy:
+      ansible.builtin.copy:
         content: "Hello World!"
         dest: "{{ httpd_data_directory }}/index.html"
         mode: "0644"
 
     - name: see if the sample index.html returns 200
-      uri:
+      ansible.builtin.uri:
         url: "https://127.0.0.1:8443/"
         validate_certs: no
 
     - name: see if TRACE option returns 405
-      uri:
+      ansible.builtin.uri:
         url: "https://127.0.0.1:8443/"
         method: TRACE
         status_code:
