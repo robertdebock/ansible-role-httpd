@@ -19,7 +19,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   roles:
     - role: robertdebock.httpd
       httpd_port: 8080
-      httpd_ssl_port: 8443
+      # httpd_ssl_port: 8443
       httpd_locations:
         - name: mylocation1
           location: /mylocation1
@@ -88,6 +88,9 @@ httpd_servername: "{{ ansible_fqdn }}"
 
 # The non-SSL port to use.
 httpd_port: 80
+
+# Enable (self-signed certificates) SSL?
+https_ssl_enable: no
 
 # To configure https, set the hostname to listen to.
 httpd_ssl_servername: "{{ ansible_fqdn }}"

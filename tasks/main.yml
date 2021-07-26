@@ -31,7 +31,7 @@
         state: present
       loop:
         - "{{ httpd_port }}"
-        - "{{ httpd_ssl_port }}"
+        - "{{ httpd_ssl_port | default(omit)}}"
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
@@ -44,6 +44,8 @@
   notify:
     - test httpd configuration validity
     - restart httpd
+  when:
+    - https_ssl_enable
 
 - name: configure locations
   ansible.builtin.template:
@@ -101,6 +103,8 @@
   notify:
     - test httpd configuration validity
     - restart httpd
+  when:
+    - https_ssl_enable
 
 - name: create docroot
   ansible.builtin.file:
