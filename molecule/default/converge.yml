@@ -6,8 +6,9 @@
 
   roles:
     - role: ansible-role-httpd
+      https_ssl_enable: yes
       httpd_port: 8080
-      # httpd_ssl_port: 8443
+      httpd_ssl_port: 8443
       httpd_locations:
         - name: mylocation1
           location: /mylocation1
