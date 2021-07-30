@@ -4,11 +4,11 @@ Install and configure httpd on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-httpd/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-httpd/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-httpd/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-httpd)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/httpd)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/httpd)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-httpd.svg)](https://github.com/robertdebock/ansible-role-httpd/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-httpd/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-httpd/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-httpd/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-httpd)|[![quality](https://img.shields.io/ansible/quality/21855)](https://galaxy.ansible.com/robertdebock/httpd)|[![downloads](https://img.shields.io/ansible/role/d/21855)](https://galaxy.ansible.com/robertdebock/httpd)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-httpd.svg)](https://github.com/robertdebock/ansible-role-httpd/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
-This example is taken from `molecule/resources/converge.yml` and is tested on each push, pull request and release.
+This example is taken from `molecule/default/converge.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
 - name: Converge
@@ -18,7 +18,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
 
   roles:
     - role: robertdebock.httpd
-      https_ssl_enable: yes
+      # https_ssl_enable: yes
       httpd_port: 8080
       httpd_ssl_port: 8443
       httpd_locations:
@@ -38,25 +38,25 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         - name: remote
           servername: www3.example.com
           remote: "http://localhost:3128/"
-        - name: backend_https
-          servername: www4.example.com
-          backend_url: "https://www.example.com/"
-        - name: piratebay
-          servername: piratebay.nl
-          backend_url: "https://thepirate-bay.org/"
-          proxy_preserve_host: Off
-          proxy_requests: Off
-          setenv:
-            - name: force-proxy-request-1.0
-              value: 1
-            - name: proxy-nokeepalive
-              value: 1
-            - name: proxy-initial-not-pooled
-            - name: proxy-sendchunks
-              value: 1
+        # - name: backend_https
+        #   servername: www4.example.com
+        #   backend_url: "https://www.example.com/"
+        # - name: piratebay
+        #   servername: piratebay.nl
+        #   backend_url: "https://thepirate-bay.org/"
+        #   proxy_preserve_host: Off
+        #   proxy_requests: Off
+        #   setenv:
+        #     - name: force-proxy-request-1.0
+        #       value: 1
+        #     - name: proxy-nokeepalive
+        #       value: 1
+        #     - name: proxy-initial-not-pooled
+        #     - name: proxy-sendchunks
+        #       value: 1
 ```
 
-The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:
+The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
 ```yaml
 ---
 - name: Prepare
