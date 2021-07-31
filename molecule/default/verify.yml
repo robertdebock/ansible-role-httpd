@@ -25,9 +25,10 @@
       ansible.builtin.uri:
         url: "http://127.0.0.1:8080/"
 
-    - name: see if TRACE option returns 405
+    - name: see if TRACE option returns 405 or 404
       ansible.builtin.uri:
         url: "http://127.0.0.1:8080/"
         method: TRACE
         status_code:
           - 405
+          - 404
