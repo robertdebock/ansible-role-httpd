@@ -42,3 +42,7 @@
         #     - name: proxy-initial-not-pooled
         #     - name: proxy-sendchunks
         #       value: 1
+        - name: vhost_template_test
+          template: vhost-template-test
+          servername: www5.example.com
+          remote: "http://localhost:5555/"

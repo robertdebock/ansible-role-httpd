@@ -77,7 +77,7 @@
 
 - name: configure vhosts
   ansible.builtin.template:
-    src: vhost.conf.j2
+    src: "{{ item.template | default('vhost') }}.conf.j2"
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
     mode: "0644"
   loop: "{{ httpd_vhosts }}"
