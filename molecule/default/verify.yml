@@ -39,7 +39,7 @@
           - 404
 
     - name: install passlib
-      package:
+      ansible.builtin.package:
         name: python3-passlib
         state: present
 

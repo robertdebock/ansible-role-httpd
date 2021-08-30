@@ -1,7 +1,7 @@
 ---
 
 - name: install ssl packages
-  package:
+  ansible.builtin.package:
     name: "{{ httpd_ssl_packages }}"
     state: present
 - name: place configuration
