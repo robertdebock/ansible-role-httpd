@@ -76,14 +76,6 @@
   when:
     - httpd_directories is defined
 
-# - name: remove welcome.conf
-#   file:
-#     path: "{{ httpd_config_directory }}/welcome.conf"
-#     state: absent
-#   notify:
-#     - test httpd configuration validity
-#     - restart httpd
-
 - name: flush handlers
   ansible.builtin.meta: flush_handlers
 
