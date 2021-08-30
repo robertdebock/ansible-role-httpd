@@ -1,5 +1,12 @@
 ---
 
+- name: enable proxy_httpd
+  community.general.apache2_module:
+    name: proxy_http
+    state: present
+  when:
+    - ansible_os_family in [ "Debian", "Suse" ]
+
 - name: configure locations
   ansible.builtin.template:
     src: location.conf.j2
