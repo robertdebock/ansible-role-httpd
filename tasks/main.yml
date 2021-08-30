@@ -65,9 +65,9 @@
     src: "{{ httpd_ports_conf }}.j2"
     dest: "{{ httpd_server_root }}/{{ httpd_ports_conf }}"
     mode: "0644"
-    notify:
-      - test httpd configuration validity
-      - restart httpd
+  notify:
+    - test httpd configuration validity
+    - restart httpd
   when:
     - ansible_os_family in [ "Debian", "Suse" ]
 
