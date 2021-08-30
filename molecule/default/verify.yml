@@ -4,7 +4,9 @@
   become: yes
   gather_facts: yes
 
-  vars_files: ../../vars/main.yml
+  vars_files:
+    - ../../vars/main.yml
+    - ../../defaults/main.yml
 
   tasks:
     - name: check if ports are open
@@ -13,7 +15,6 @@
         timeout: 2
       loop:
         - "8080"
-        # - "8443"
 
     - name: place sample index.html
       ansible.builtin.copy:
@@ -24,6 +25,10 @@
     - name: see if the sample index.html returns 200
       ansible.builtin.uri:
         url: "http://127.0.0.1:8080/"
+        return_content: yes
+      register: index_html
+      failed_when:
+        - "'Hello World' not in index_html.content"
 
     - name: see if TRACE option returns 405 or 404
       ansible.builtin.uri:
@@ -32,3 +37,29 @@
         status_code:
           - 405
           - 404
+
+    - name: install passlib
+      package:
+        name: python3-passlib
+        state: present
+
+    - name: create htpasswd file
+      community.general.htpasswd:
+        path: /password.file
+        name: my_user
+        password: 'my_password'
+        mode: "0640"
+
+    - name: place .htaccess
+      ansible.builtin.copy:
+        dest: "{{ httpd_data_directory}}/my_directory/.htaccess"
+        content: |
+          AuthType Basic
+          AuthName "Password Required"
+          AuthUserFile "/password.file"
+
+    - name: see if authentication is required
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8080/my_directory
+        status_code:
+          - 401
