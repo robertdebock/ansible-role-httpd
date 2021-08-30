@@ -1,9 +1,12 @@
 ---
 
-- name: enable proxy_httpd
+- name: enable modules
   community.general.apache2_module:
-    name: proxy_http
+    name: "{{ item }}"
     state: present
+  loop:
+    - proxy
+    - proxy_http
   when:
     - ansible_os_family in [ "Debian", "Suse" ]
 
