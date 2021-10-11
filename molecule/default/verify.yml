@@ -52,7 +52,7 @@
 
     - name: place .htaccess
       ansible.builtin.copy:
-        dest: "{{ httpd_data_directory}}/my_directory/.htaccess"
+        dest: "{{ httpd_data_directory }}/my_directory/.htaccess"
         content: |
           AuthType Basic
           AuthName "Password Required"
