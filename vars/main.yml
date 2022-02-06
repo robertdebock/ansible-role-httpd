@@ -26,7 +26,9 @@ _httpd_ssl_packages:
     - openssl
   Alpine:
     - apache2-ssl
-
+  Debian: 
+    - openssl
+      
 httpd_ssl_packages: "{{ _httpd_ssl_packages[ansible_os_family] | default(_httpd_ssl_packages['default'] ) }}"
 
 _httpd_service:
