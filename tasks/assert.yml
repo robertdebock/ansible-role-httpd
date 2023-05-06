@@ -1,5 +1,4 @@
 ---
-
 - name: assert | Test if httpd_servername is set correctly
   ansible.builtin.assert:
     that:
@@ -162,4 +161,11 @@
     that:
       - httpd_remove_example is defined
       - httpd_remove_example is boolean
+    quiet: yes
+
+- name: Test if httpd_additionnal_modules is set correctly
+  ansible.builtin.assert:
+    that:
+      - httpd_additionnal_modules is defined
+      - httpd_additionnal_modules | type_debug == "list"
     quiet: yes
