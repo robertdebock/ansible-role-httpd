@@ -31,3 +31,5 @@ httpd_additionnal_modules: []
 
 apache_global_vhost_settings: |
   DirectoryIndex index.php index.html
+
+vhost_conf_template: vhost.conf.j2

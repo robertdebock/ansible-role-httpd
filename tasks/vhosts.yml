@@ -1,5 +1,4 @@
 ---
-
 - name: vhosts | Create docroot
   ansible.builtin.file:
     path: "{{ item.documentroot }}"
@@ -15,7 +14,7 @@
 
 - name: vhosts | Configure vhosts
   ansible.builtin.template:
-    src: vhost.conf.j2
+    src: "{{ vhost_conf_template }}"
     dest: "{{ httpd_config_directory }}/{{ item.name }}.conf"
     mode: "0644"
   loop: "{{ httpd_vhosts }}"
