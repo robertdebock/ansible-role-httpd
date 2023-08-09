@@ -69,11 +69,19 @@ httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
 
 _httpd_config_dest:
   Alpine: "{{ httpd_server_root }}/httpd.conf"
-  Debian: "{{ httpd_server_root }}/httpd.conf"
+  Debian: "{{ httpd_server_root }}/apache2.conf"
   RedHat: "{{ httpd_server_root }}/conf/httpd.conf"
   Suse: "{{ httpd_server_root }}/httpd.conf"
 
 httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
+
+_httpd_vhosts_directory:
+  default: "{{ httpd_server_root }}/conf.d"
+  Alpine: "{{ httpd_server_root }}/conf.d"
+  Debian: "{{ httpd_server_root }}/sites-enabled"
+  Suse: "{{ httpd_server_root }}/conf.d"
+
+httpd_vhosts_directory: "{{ _httpd_vhosts_directory[ansible_os_family] | default(_httpd_vhosts_directory['default']) }}"
 
 # Some distributions have the "Listen" parameters somewhere else.
 _httpd_ports_conf:
@@ -100,7 +108,7 @@ httpd_modules_path: "{{ _httpd_modules_path[ansible_os_family] | default(_httpd_
 # This variable is used in handlers to test the configuration.
 _httpd_binary:
   default: httpd
-  Debian: apachectl
+  Debian: apache2ctl
 
 httpd_binary: "{{ _httpd_binary[ansible_os_family] | default(_httpd_binary['default']) }}"
 
