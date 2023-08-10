@@ -169,3 +169,10 @@
       - httpd_additionnal_modules is defined
       - httpd_additionnal_modules | type_debug == "list"
     quiet: yes
+
+- name: assert | Test if httpd_modules_to_activate_with_command is set correctly
+  ansible.builtin.assert:
+    that:
+      - httpd_modules_to_activate_with_command is defined
+      - httpd_modules_to_activate_with_command | type_debug == "list"
+    quiet: yes
