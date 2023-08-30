@@ -35,3 +35,5 @@ apache_global_vhost_settings: |
   DirectoryIndex index.php index.html
 
 vhost_conf_template: vhost.conf.j2
+
+default_vhost_conf: default_vhost.conf

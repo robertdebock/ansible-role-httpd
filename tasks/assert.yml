@@ -176,3 +176,10 @@
       - httpd_modules_to_activate_with_command is defined
       - httpd_modules_to_activate_with_command | type_debug == "list"
     quiet: yes
+
+- name: assert | Test if default_vhost_conf is set correctly
+  ansible.builtin.assert:
+    that:
+      - default_vhost_conf is defined
+      - default_vhost_conf is string
+    quiet: yes
