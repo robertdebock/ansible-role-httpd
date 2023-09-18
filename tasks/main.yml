@@ -47,17 +47,20 @@
     - Restart httpd
 
 - name: Import ssl.yml
-  ansible.builtin.import_tasks: ssl.yml
+  ansible.builtin.import_tasks:
+    file: ssl.yml
   when:
     - https_ssl_enable
 
 - name: Import locations.yml
-  ansible.builtin.import_tasks: locations.yml
+  ansible.builtin.import_tasks:
+    file: locations.yml
   when:
     - httpd_locations is defined
 
 - name: Import vhosts.yml
-  ansible.builtin.import_tasks: vhosts.yml
+  ansible.builtin.import_tasks:
+    file: vhosts.yml
   when:
     - httpd_vhosts is defined
 
@@ -73,7 +76,8 @@
     - ansible_os_family in [ "Debian", "Suse" ]
 
 - name: Import directories.yml
-  ansible.builtin.import_tasks: directories.yml
+  ansible.builtin.import_tasks:
+    file: directories.yml
   when:
     - httpd_directories is defined
 
