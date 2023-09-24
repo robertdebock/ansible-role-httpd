@@ -46,6 +46,16 @@
     - Test httpd configuration validity
     - Restart httpd
 
+- name: Activate httpd module | Debian
+  ansible.builtin.command:
+    cmd: "a2enmod {{ item }}"
+  changed_when: no
+  loop: "{{ httpd_modules_to_activate_with_command }}"
+  when:
+    - ansible_os_family == 'Debian'
+  notify:
+    - Test httpd configuration validity
+
 - name: Import ssl.yml
   ansible.builtin.import_tasks:
     file: ssl.yml
