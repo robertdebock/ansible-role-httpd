@@ -1,8 +1,8 @@
 ---
 - name: Verify
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   vars_files:
     - ../../vars/main.yml
@@ -25,7 +25,7 @@
     - name: See if the sample index.html returns 200
       ansible.builtin.uri:
         url: "http://127.0.0.1:8080/"
-        return_content: yes
+        return_content: true
       register: index_html
       failed_when:
         - "'Hello World' not in index_html.content"

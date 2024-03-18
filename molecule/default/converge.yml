@@ -1,8 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   vars_files:
     - ../../vars/main.yml
@@ -10,7 +10,7 @@
 
   roles:
     - role: ansible-role-httpd
-      # https_ssl_enable: yes
+      # https_ssl_enable: true
       httpd_port: 8080
       httpd_ssl_port: 8443
       httpd_locations:
@@ -49,7 +49,7 @@
       #   - name: no_doc_root
       #     servername: nodocroot.example.com
       #     documentroot: /var/www/html/nodocroot
-      #     create_docroot: no
+      #     create_docroot: false
       httpd_directories:
         - name: my_directory
           path: "{{ httpd_data_directory }}/my_directory"
