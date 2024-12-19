@@ -30,6 +30,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         - name: my_location
           location: /my_location
           backend_url: "http://localhost:8080/myapplication"
+      httpd_vhosts:
+        - name: redirect_to_https
+          servername: www.example.com
+          port: 8080
+          redirect_to_https: true
+          ssl_port: 8443
       # httpd_vhosts:
       #   - name: my_vhost_docroot
       #     servername: www1.example.com
