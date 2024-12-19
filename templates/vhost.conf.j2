@@ -26,7 +26,7 @@
 {% if item.redirect_to_https is defined and item.redirect_to_https %}
    RewriteEngine On
    RewriteCond %{HTTPS} off
-   RewriteRule ^(.*)$ https://%{HTTP_HOST}:{{ item.ssl_port | default(httpd_ssl_port) }}%{REQUEST_URI} [L,R=301]
+   RewriteRule ^(.*)$ https://%{SERVER_NAME}:{{ item.ssl_port | default(httpd_ssl_port) }}%{REQUEST_URI} [L,R=301]
 {% else %}
 {% if item.options is defined %}
    Options {{ item.options|join(' ') }}
