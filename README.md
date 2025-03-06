@@ -22,7 +22,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     - ../../defaults/main.yml
 
   roles:
-    - role: ansible-role-httpd
+    - role: robertdebock.httpd
       # https_ssl_enable: true
       httpd_port: 8080
       httpd_ssl_port: 8443
