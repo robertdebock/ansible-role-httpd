@@ -69,6 +69,15 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #     servername: nodocroot.example.com
       #     documentroot: /var/www/html/nodocroot
       #     create_docroot: false
+      #   - name: my_vhost_with_locations
+      #     servername: my_vhost_with_locations.example.com
+      #     locations:
+      #       - name: my_location
+      #         location: /my_location
+      #         backend_url: "http://localhost:8080/myapplication"
+      #       - name: my_location2
+      #         location: /my_location2
+      #         backend_url: "http://localhost:8080/myapplication2"
       httpd_directories:
         - name: my_directory
           path: "{{ httpd_data_directory }}/my_directory"
