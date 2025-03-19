@@ -62,9 +62,9 @@ ProxyPass / {{ item.backend_url }}
 {% endif %}
 {% if item.locations is defined %}
 {% for location in item.locations %}
-   <Location {{ item.location }}>
-     ProxyPass {{ item.backend_url }}
-     ProxyPassReverse {{ item.backend_url }}
+   <Location {{ location.location }}>
+     ProxyPass {{ location.backend_url }}
+     ProxyPassReverse {{ location.backend_url }}
    </Location>
 {% endfor %}
 {% endif %}

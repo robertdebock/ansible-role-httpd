@@ -115,6 +115,18 @@
     - httpd_vhosts is defined
     - item.serveralias is defined
 
+- name: assert | Test item.locations in httpd_vhosts
+  ansible.builtin.assert:
+    that:
+      - item.locations is iterable
+    quiet: true
+  loop: "{{ httpd_vhosts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - httpd_vhosts is defined
+    - item.locations is defined
+
 - name: assert | Test httpd_directories
   ansible.builtin.assert:
     that:
