@@ -60,10 +60,12 @@ ProxyPass / {{ item.backend_url }}
 {% endfor %}
 {% endif %}
 {% endif %}
+{% if item.locations is defined %}
 {% for location in item.locations %}
    <Location {{ item.location }}>
      ProxyPass {{ item.backend_url }}
      ProxyPassReverse {{ item.backend_url }}
    </Location>
 {% endfor %}
+{% endif %}
 </VirtualHost>
