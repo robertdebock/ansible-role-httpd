@@ -72,12 +72,21 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #   - name: my_vhost_with_locations
       #     servername: my_vhost_with_locations.example.com
       #     locations:
-      #       - name: my_location
-      #         location: /my_location
+      #       - location: /my_location
       #         backend_url: "http://localhost:8080/myapplication"
-      #       - name: my_location2
-      #         location: /my_location2
+      #       - location: /my_location2
       #         backend_url: "http://localhost:8080/myapplication2"
+      #   - name: my_https_vhost_with_locations
+      #     port: 8443
+      #     servername: my_vhost_with_locations.example.com
+      #     ssl_certificate_file: "{{ httpd_ssl_certificate_file }}"
+      #     ssl_certificate_key_file: "{{ httpd_ssl_certificate_key_file }}"
+      #     locations:
+      #       - location: /my_location
+      #         backend_url: "http://localhost:8080/myapplication"
+      #       - location: /my_location2
+      #         backend_url: "http://localhost:8080/myapplication2"
+
       httpd_directories:
         - name: my_directory
           path: "{{ httpd_data_directory }}/my_directory"

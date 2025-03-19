@@ -28,6 +28,13 @@
    RewriteCond %{HTTPS} off
    RewriteRule ^(.*)$ https://%{SERVER_NAME}:{{ item.ssl_port | default(httpd_ssl_port) }}%{REQUEST_URI} [L,R=301]
 {% else %}
+
+{% if item.ssl_certificate_file is defined %}
+   SSLEngine on
+   SSLCertificateFile "{{ item.ssl_certificate_file }}"
+   SSLCertificateKeyFile "{{ item.ssl_certificate_key_file }}"
+{% endif %}
+
 {% if item.options is defined %}
    Options {{ item.options|join(' ') }}
 {% endif %}

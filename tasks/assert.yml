@@ -127,6 +127,26 @@
     - httpd_vhosts is defined
     - item.locations is defined
 
+- name: assert | Test item.ssl_certificate_file in httpd_vhosts
+  ansible.builtin.assert:
+    that:
+      - item.ssl_certificate_file is string
+      - item.ssl_certificate_file is not none
+      - item.ssl_certificate_key_file is defined
+    when:
+      - httpd_vhosts is defined
+      - item.ssl_certificate_file is defined
+
+- name: assert | Test item.ssl_certificate_key_file in httpd_vhosts
+  ansible.builtin.assert:
+    that:
+      - item.ssl_certificate_key_file is string
+      - item.ssl_certificate_key_file is not none
+      - item.ssl_certificate_file is defined
+    when:
+      - httpd_vhosts is defined
+      - item.ssl_certificate_key_file is defined
+
 - name: assert | Test httpd_directories
   ansible.builtin.assert:
     that:
