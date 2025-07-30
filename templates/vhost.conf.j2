@@ -79,6 +79,7 @@ ProxyPass / {{ item.backend_url }}
 {% for directory in item.directories %}
    <Directory "{{ directory.path }}">
      Options {% for option in directory.options %}{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
+
      AllowOverride {{ directory.allow_override }}
      Require {{ directory.require }}
    </Directory>
