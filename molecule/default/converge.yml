@@ -73,6 +73,16 @@
       #         backend_url: "http://localhost:8080/myapplication"
       #       - location: /my_location2
       #         backend_url: "http://localhost:8080/myapplication2"
+      #   - name: my_vhost_with_error_log
+      #     servername: my_vhost_with_error_log.example.com
+      #     error_log: /var/log/httpd/my_vhost_with_error_log.example.com-error.log
+      #   - name: my_vhost_with_custom_log
+      #     servername: my_vhost_with_custom_log.example.com
+      #     custom_log: /var/log/httpd/my_vhost_with_custom_log.example.com-access.log combined
+      #   - name: my_vhost_with_error_log_and_custom_log
+      #     servername: my_vhost_with_error_log_and_custom_log.example.com
+      #     error_log: /var/log/httpd/my_vhost_with_error_log_and_custom_log.example.com-error.log
+      #     custom_log: /var/log/httpd/my_vhost_with_error_log_and_custom_log.example.com-access.log combined
 
       httpd_directories:
         - name: my_directory

@@ -147,6 +147,26 @@
     - httpd_vhosts is defined
     - item.ssl_certificate_key_file is defined
 
+- name: assert | Test item.error_log in httpd_vhosts
+  ansible.builtin.assert:
+    that:
+      - item.error_log is string
+      - item.error_log is not none
+    quiet: true
+  when:
+    - httpd_vhosts is defined
+    - item.error_log is defined
+
+- name: assert | Test item.custom_log in httpd_vhosts
+  ansible.builtin.assert:
+    that:
+      - item.custom_log is string
+      - item.custom_log is not none
+    quiet: true
+  when:
+    - httpd_vhosts is defined
+    - item.custom_log is defined
+
 - name: assert | Test httpd_directories
   ansible.builtin.assert:
     that:
