@@ -76,9 +76,9 @@ ProxyPass / {{ item.backend_url }}
 {% endfor %}
 {% endif %}
 {% if item.error_log is defined %}
-     ErrorLog {{ item.error_log }}
+   ErrorLog {{ item.error_log }}
 {% endif %}
 {% if item.custom_log is defined %}
-     CustomLog {{ item.custom_log }} combined
+   CustomLog {{ item.custom_log }} combined
 {% endif %}
 </VirtualHost>
