@@ -96,6 +96,15 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #     servername: my_vhost_with_error_log_and_custom_log.example.com
       #     error_log: /var/log/httpd/my_vhost_with_error_log_and_custom_log.example.com-error.log
       #     custom_log: /var/log/httpd/my_vhost_with_error_log_and_custom_log.example.com-access.log combined
+      #   - name: my_vhost_with_directory
+      #     servername: my_vhost_with_directory.example.com
+      #     directories:
+      #       - path: "{{ httpd_data_directory }}/my_vhost_with_directory"
+      #         options:
+      #           - Indexes
+      #           - FollowSymLinks
+      #         allow_override: All
+      #         require: all granted
 
       httpd_directories:
         - name: my_directory
