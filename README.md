@@ -105,6 +105,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #           - FollowSymLinks
       #         allow_override: All
       #         require: all granted
+      #   - name: vhost-with-ips
+      #     servername: secure.example.com
+      #        require: all denied
+      #        ip:
+      #         - 8.8.8.8
+      #         - 9.9.9.9
 
       httpd_directories:
         - name: my_directory
