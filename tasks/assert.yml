@@ -243,3 +243,12 @@
       - default_vhost_conf is defined
       - default_vhost_conf is string
     quiet: true
+
+- name: assert | Test for illegal combination of Require and ips
+  ansible.builtin.assert:
+    that:
+      - (directory.require is defined and directory.ip is not defined) or (directory.require is not defined and directory.ip is defined) or (directory.require = 'all denied' and directory.ip is defined) 
+    fail_msg: >-
+      When using an 'ip' list, the 'require' key must either be 'all denied'
+      or not defined at all. It cannot be '{{ directory.require }}'.
+    quiet: true
