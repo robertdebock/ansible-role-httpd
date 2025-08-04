@@ -108,7 +108,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #   - name: vhost-with-ips
       #     servername: secure.example.com
       #        require: all denied
-      #        ip:
+      #        ips:
       #         - 8.8.8.8
       #         - 9.9.9.9
 
