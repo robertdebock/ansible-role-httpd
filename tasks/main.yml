@@ -12,6 +12,14 @@
     name: "{{ httpd_packages }}"
     state: present
 
+- name: Ensure /run/lock exists | Debian
+  ansible.builtin.file:
+    path: /run/lock
+    state: directory
+    mode: "1777"
+  when:
+    - ansible_os_family == 'Debian'
+
 - name: Configure selinux
   when:
     - ansible_selinux.status is defined
