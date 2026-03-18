@@ -18,7 +18,7 @@ _httpd_packages:
     - lynx
     - w3m
 
-httpd_packages: "{{ httpd_additionnal_modules + _httpd_packages[ansible_os_family] | default(_httpd_packages['default']) }}"
+httpd_packages: "{{ httpd_additionnal_modules + _httpd_packages[ansible_facts['os_family']] | default(_httpd_packages['default']) }}"
 
 _httpd_modules_to_activate_with_command:
   default: []
@@ -26,7 +26,7 @@ _httpd_modules_to_activate_with_command:
     - proxy
     - proxy_http
 
-httpd_modules_to_activate_with_command: "{{ httpd_custom_modules_to_activate_with_command + _httpd_modules_to_activate_with_command[ansible_os_family] | default(_httpd_modules_to_activate_with_command['default']) }}"
+httpd_modules_to_activate_with_command: "{{ httpd_custom_modules_to_activate_with_command + _httpd_modules_to_activate_with_command[ansible_facts['os_family']] | default(_httpd_modules_to_activate_with_command['default']) }}"
 
 _httpd_ssl_packages:
   default:
@@ -37,7 +37,7 @@ _httpd_ssl_packages:
   Debian:
     - openssl
 
-httpd_ssl_packages: "{{ _httpd_ssl_packages[ansible_os_family] | default(_httpd_ssl_packages['default']) }}"
+httpd_ssl_packages: "{{ _httpd_ssl_packages[ansible_facts['os_family']] | default(_httpd_ssl_packages['default']) }}"
 
 _httpd_service:
   default: httpd
@@ -46,7 +46,7 @@ _httpd_service:
   Suse: apache2
   RedHat: httpd
 
-httpd_service: "{{ _httpd_service[ansible_os_family] | default(_httpd_service['default']) }}"
+httpd_service: "{{ _httpd_service[ansible_facts['os_family']] | default(_httpd_service['default']) }}"
 
 _httpd_server_root:
   default: /etc/httpd
@@ -56,7 +56,7 @@ _httpd_server_root:
 
 # This variable is used to determine where other configurations can
 # be found, like the `conf.d` directory.
-httpd_server_root: "{{ _httpd_server_root[ansible_os_family] | default(_httpd_server_root['default']) }}"
+httpd_server_root: "{{ _httpd_server_root[ansible_facts['os_family']] | default(_httpd_server_root['default']) }}"
 
 _httpd_config_directory:
   default: "{{ httpd_server_root }}/conf.d"
@@ -64,7 +64,7 @@ _httpd_config_directory:
   Debian: "{{ httpd_server_root }}/conf-enabled"
   Suse: "{{ httpd_server_root }}/conf.d"
 
-httpd_config_directory: "{{ _httpd_config_directory[ansible_os_family] | default(_httpd_config_directory['default']) }}"
+httpd_config_directory: "{{ _httpd_config_directory[ansible_facts['os_family']] | default(_httpd_config_directory['default']) }}"
 
 # Every distribution has it's own configuration.
 _httpd_config_src:
@@ -73,7 +73,7 @@ _httpd_config_src:
   RedHat: httpd.conf-RedHat.j2
   Suse: httpd.conf-Suse.j2
 
-httpd_config_src: "{{ _httpd_config_src[ansible_os_family] }}"
+httpd_config_src: "{{ _httpd_config_src[ansible_facts['os_family']] }}"
 
 _httpd_config_dest:
   Alpine: "{{ httpd_server_root }}/httpd.conf"
@@ -81,7 +81,7 @@ _httpd_config_dest:
   RedHat: "{{ httpd_server_root }}/conf/httpd.conf"
   Suse: "{{ httpd_server_root }}/httpd.conf"
 
-httpd_config_dest: "{{ _httpd_config_dest[ansible_os_family] }}"
+httpd_config_dest: "{{ _httpd_config_dest[ansible_facts['os_family']] }}"
 
 _httpd_vhosts_directory:
   default: "{{ httpd_server_root }}/conf.d"
@@ -89,7 +89,7 @@ _httpd_vhosts_directory:
   Debian: "{{ httpd_server_root }}/sites-available"
   Suse: "{{ httpd_server_root }}/conf.d"
 
-httpd_vhosts_directory: "{{ _httpd_vhosts_directory[ansible_os_family] | default(_httpd_vhosts_directory['default']) }}"
+httpd_vhosts_directory: "{{ _httpd_vhosts_directory[ansible_facts['os_family']] | default(_httpd_vhosts_directory['default']) }}"
 
 httpd_vhosts_enabled_directory: "{{ httpd_server_root }}/sites-enabled"
 
@@ -98,7 +98,7 @@ _httpd_ports_conf:
   Debian: ports.conf
   Suse: listen.conf
 
-httpd_ports_conf: "{{ _httpd_ports_conf[ansible_os_family] }}"
+httpd_ports_conf: "{{ _httpd_ports_conf[ansible_facts['os_family']] }}"
 
 # This variable is used in `default_vhost.conf`.
 _httpd_data_directory:
@@ -106,21 +106,21 @@ _httpd_data_directory:
   Alpine: /var/www/{{ httpd_servername | default('localhost') }}/htdocs
   Suse: /srv/www/htdocs
 
-httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default']) }}"
+httpd_data_directory: "{{ _httpd_data_directory[ansible_facts['os_family']] | default(_httpd_data_directory['default']) }}"
 
 _httpd_modules_path:
   default: modules
   Debian: /usr/lib/apache2/modules
   Suse: /usr/lib64/apache2-prefork
 
-httpd_modules_path: "{{ _httpd_modules_path[ansible_os_family] | default(_httpd_modules_path['default']) }}"
+httpd_modules_path: "{{ _httpd_modules_path[ansible_facts['os_family']] | default(_httpd_modules_path['default']) }}"
 
 # This variable is used in handlers to test the configuration.
 _httpd_binary:
   default: httpd
   Debian: apache2ctl
 
-httpd_binary: "{{ _httpd_binary[ansible_os_family] | default(_httpd_binary['default']) }}"
+httpd_binary: "{{ _httpd_binary[ansible_facts['os_family']] | default(_httpd_binary['default']) }}"
 
 _httpd_openssl_key_directory:
   default: /tmp
@@ -129,7 +129,7 @@ _httpd_openssl_key_directory:
   RedHat: /etc/pki/tls/private
   Suse: /etc/ssl/private
 
-httpd_openssl_key_directory: "{{ _httpd_openssl_key_directory[ansible_os_family] | default(_httpd_openssl_key_directory['default']) }}"
+httpd_openssl_key_directory: "{{ _httpd_openssl_key_directory[ansible_facts['os_family']] | default(_httpd_openssl_key_directory['default']) }}"
 
 _httpd_openssl_crt_directory:
   default: /tmp
@@ -138,4 +138,4 @@ _httpd_openssl_crt_directory:
   RedHat: /etc/pki/tls/certs
   Suse: /etc/ssl/certs
 
-httpd_openssl_crt_directory: "{{ _httpd_openssl_crt_directory[ansible_os_family] | default(_httpd_openssl_crt_directory['default']) }}"
+httpd_openssl_crt_directory: "{{ _httpd_openssl_crt_directory[ansible_facts['os_family']] | default(_httpd_openssl_crt_directory['default']) }}"

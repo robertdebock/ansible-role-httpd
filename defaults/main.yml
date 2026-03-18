@@ -2,7 +2,7 @@
 # defaults file for httpd
 
 # The servername to use.
-httpd_servername: "{{ ansible_fqdn }}"
+httpd_servername: "{{ ansible_facts['fqdn'] }}"
 
 # The non-SSL port to use.
 httpd_port: 80
@@ -11,7 +11,7 @@ httpd_port: 80
 https_ssl_enable: false
 
 # To configure https, set the hostname to listen to.
-httpd_ssl_servername: "{{ ansible_fqdn }}"
+httpd_ssl_servername: "{{ ansible_facts['fqdn'] }}"
 
 # For SSL a TCP port is required.
 httpd_ssl_port: 443

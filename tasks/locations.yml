@@ -8,7 +8,7 @@
     - proxy
     - proxy_http
   when:
-    - ansible_os_family in [ "Debian", "Suse" ]
+    - ansible_facts['os_family'] in [ "Debian", "Suse" ]
 
 - name: locations | Configure locations
   ansible.builtin.template:

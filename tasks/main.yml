@@ -18,12 +18,12 @@
     state: directory
     mode: "1777"
   when:
-    - ansible_os_family == 'Debian'
+    - ansible_facts['os_family'] == 'Debian'
 
 - name: Configure selinux
   when:
-    - ansible_selinux.status is defined
-    - ansible_selinux.status == "enabled"
+    - ansible_facts['selinux'].status is defined
+    - ansible_facts['selinux'].status == "enabled"
   block:
     - name: Modify selinux settings
       ansible.posix.seboolean:
@@ -31,8 +31,8 @@
         state: true
         persistent: true
       when:
-        - ansible_selinux.status is defined
-        - ansible_selinux.status == "enabled"
+        - ansible_facts['selinux'].status is defined
+        - ansible_facts['selinux'].status == "enabled"
       loop: "{{ httpd_sebooleans }}"
 
     - name: Allow connections to custom port
@@ -60,7 +60,7 @@
   changed_when: false
   loop: "{{ httpd_modules_to_activate_with_command }}"
   when:
-    - ansible_os_family == 'Debian'
+    - ansible_facts['os_family'] == 'Debian'
   notify:
     - Test httpd configuration validity
 
@@ -91,7 +91,7 @@
     - Test httpd configuration validity
     - Restart httpd
   when:
-    - ansible_os_family in [ "Debian", "Suse" ]
+    - ansible_facts['os_family'] in [ "Debian", "Suse" ]
 
 - name: Import directories.yml
   ansible.builtin.import_tasks:
