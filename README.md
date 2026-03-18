@@ -133,7 +133,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
     - role: robertdebock.openssl
       openssl_items:
         - name: apache-httpd
-          common_name: "{{ ansible_fqdn }}"
+          common_name: "{{ ansible_facts['fqdn'] }}"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -147,7 +147,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # defaults file for httpd
 
 # The servername to use.
-httpd_servername: "{{ ansible_fqdn }}"
+httpd_servername: "{{ ansible_facts['fqdn'] }}"
 
 # The non-SSL port to use.
 httpd_port: 80
@@ -156,7 +156,7 @@ httpd_port: 80
 https_ssl_enable: false
 
 # To configure https, set the hostname to listen to.
-httpd_ssl_servername: "{{ ansible_fqdn }}"
+httpd_ssl_servername: "{{ ansible_facts['fqdn'] }}"
 
 # For SSL a TCP port is required.
 httpd_ssl_port: 443
