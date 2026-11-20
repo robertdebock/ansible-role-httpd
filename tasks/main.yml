@@ -57,7 +57,8 @@
 - name: Activate httpd module | Debian
   ansible.builtin.command:
     cmd: "a2enmod {{ item }}"
-  changed_when: false
+  changed_when:
+    - false
   loop: "{{ httpd_modules_to_activate_with_command }}"
   when:
     - ansible_facts['os_family'] == 'Debian'
